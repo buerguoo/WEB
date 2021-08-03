@@ -9,11 +9,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-<<<<<<< HEAD
-        <java.version>8</java.version>
-=======
         <java.version>1.8</java.version>
->>>>>>> 12d4c12cf4b46c3e537d0f1108e674439aeee7c4
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
