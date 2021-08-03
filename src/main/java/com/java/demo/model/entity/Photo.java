@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 public class Photo {
 	
 	// ID
-	private int id_ph;
+	private int id;
 	
 	// 名称
-	private String name_ph;
+	private String name;
 	
 	// 路径
-	private String path_ph;
+	private String path;
 	
 	// 相册ID
-	private int album_ph;
+	private int album;
 }

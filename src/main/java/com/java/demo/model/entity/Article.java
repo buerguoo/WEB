@@ -10,19 +10,23 @@ import lombok.NoArgsConstructor;
 public class Article {
 	
 	// id
-	private Integer id_at;
+	private Integer id;
 	
 	// 标题
-	private String title_at;
+	private String title;
 	
 	// 内容
-	private String content_at;
+	private String content;
 	
 	// 作者
-	private String author_at;
+	private String author;
 	
 	// 提交时间
-	private String postTime_at;
+	private String postTime;
 	
-
+	// 评论个数
+	private Integer commentCount;
+	
+	// 浏览次数
+	private Integer viewCount;
 }

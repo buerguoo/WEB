@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 public class Album {
 
 	// ID
-	private int id_al;
+	private int id;
 	
 	// 主人
-	private String owner_al;
+	private String owner;
 
 	// 创建时间
-	private String createTime_al;
+	private String createTime;
 }
 

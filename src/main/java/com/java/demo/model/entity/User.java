@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	// ID
-	private int id_u;
+	private int id;
 	
 	// 角色
-	private String role_u;
+	private String role;
 	
 	// 用户名
-	private String name_u;
+	private String name;
 	
 	// 密码
-	private String pswd_u;
+	private String pswd;
 }
 
