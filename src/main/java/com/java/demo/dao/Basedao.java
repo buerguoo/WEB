@@ -10,7 +10,7 @@ public interface Basedao<T> {
 	
 	void delete(int id);	
 	
-	T update(T entity);
+	void update(T entity);
 	
 	Collection<T> getAll();
 }
