@@ -5,43 +5,47 @@ package com.java.demo.dao.impl;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.java.demo.dao.ArticleDao;
+import com.java.demo.mapper.ArticleMapper;
 import com.java.demo.model.entity.Article;
 
-/**
- * @author buerguoo
- *
- */
+@Repository
 public class ArticleDaoImpl implements ArticleDao {
+
+
+	@Autowired
+	private ArticleMapper articleMapper;
+	
+
+	@Override
+	public Collection<Article> getAll() {
+		return articleMapper.selectList(null);
+	}
 
 	@Override
 	public void insert(Article entity) {
-		// TODO Auto-generated method stub
-
+		articleMapper.insert(entity);
+		
 	}
 
 	@Override
 	public Article search(int id) {
+		return articleMapper.selectById(id);
+	}
+
+	@Override
+	public void update(Article entity) {
 		// TODO Auto-generated method stub
-		return null;
+		articleMapper.updateById(entity);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Article update(Article entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Article> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		articleMapper.deleteById(id);
+		
 	}
 
 }

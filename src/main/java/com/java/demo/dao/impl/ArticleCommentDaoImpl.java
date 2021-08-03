@@ -2,39 +2,48 @@ package com.java.demo.dao.impl;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.java.demo.dao.ArticleCommentDao;
+import com.java.demo.mapper.ArticleCommentMapper;
 import com.java.demo.model.entity.ArticleComment;
 
+@Repository
 public class ArticleCommentDaoImpl implements ArticleCommentDao {
 
+	@Autowired
+	private ArticleCommentMapper articleCommentMapper;
+	
 	@Override
 	public void insert(ArticleComment entity) {
-		// TODO Auto-generated method stub
+
+		articleCommentMapper.insert(entity);
 
 	}
 
 	@Override
 	public ArticleComment search(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return articleCommentMapper.selectById(id);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
 
+		// 根据id进行删除
+		articleCommentMapper.deleteById(id);
 	}
 
 	@Override
-	public ArticleComment update(ArticleComment entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(ArticleComment entity) {
+		
+		// 更新
+		articleCommentMapper.updateById(entity);
 	}
 
 	@Override
 	public Collection<ArticleComment> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return articleCommentMapper.selectList(null);
 	}
 
 }
