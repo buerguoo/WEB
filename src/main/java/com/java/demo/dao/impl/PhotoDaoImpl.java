@@ -2,11 +2,15 @@ package com.java.demo.dao.impl;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Repository;
+
 import com.java.demo.dao.PhotoDao;
 import com.java.demo.model.entity.Photo;
 
+@Repository
 public class PhotoDaoImpl implements PhotoDao {
 
+	
 	@Override
 	public void insert(Photo entity) {
 		// TODO Auto-generated method stub
