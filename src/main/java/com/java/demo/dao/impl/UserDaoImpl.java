@@ -2,45 +2,61 @@ package com.java.demo.dao.impl;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.java.demo.dao.UserDao;
+import com.java.demo.mapper.UserMapper;
+import com.java.demo.model.entity.User;
 import com.java.demo.model.entity.User;
 
+@Repository
 public class UserDaoImpl implements UserDao {
+
+	@Autowired
+	private UserMapper userMapper;
 
 	@Override
 	public void insert(User entity) {
-		// TODO Auto-generated method stub
 
+		userMapper.insert(entity);
 	}
 
 	@Override
 	public User search(int id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return userMapper.selectById(id);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+
+		userMapper.deleteById(id);
 
 	}
 
 	@Override
-	public User update(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(User entity) {
+		userMapper.updateById(entity);
 	}
 
 	@Override
 	public Collection<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.selectList(null);
 	}
 
 	@Override
 	public User getUserByName(String username) {
-		// TODO Auto-generated method stub
-		return null;
+
+		// 只有在用户唯一的时候才能用
+		User usr = new User();
+		usr.setName(username);
+		QueryWrapper<User> querywrapper = Wrappers.query();
+		querywrapper.like("name", username);
+		
+		return userMapper.selectOne(querywrapper);
 	}
 
 }
