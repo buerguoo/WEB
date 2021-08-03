@@ -7,5 +7,5 @@ import com.java.demo.model.entity.Album;
 
 @Repository
 public interface AlbumMapper extends BaseMapper<Album> {
-
+	
 }
