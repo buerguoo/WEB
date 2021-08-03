@@ -17,5 +17,8 @@ public class Album {
 
 	// 创建时间
 	private String createTime;
+	
+	//相册名称
+	private String name;
 }
 

@@ -2,39 +2,50 @@ package com.java.demo.service.impl;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Service;
+
+import com.java.demo.dao.AlbumDao;
+import com.java.demo.dao.impl.AlbumDaoImpl;
 import com.java.demo.model.entity.Album;
 import com.java.demo.service.AlbumService;
 
+@Service("AlbumService")
 public class AlbumServiceImpl implements AlbumService {
 
+	AlbumDao albumdao = new AlbumDaoImpl();
 	@Override
 	public void addAlum(Album album) {
 		// TODO Auto-generated method stub
-
+		albumdao.insert(album);
 	}
 
 	@Override
 	public Collection<Album> getAllAlbum() {
 		// TODO Auto-generated method stub
-		return null;
+		Collection<Album> albums = albumdao.getAll();
+		return albums;
 	}
 
 	@Override
 	public Album getAlbumById(int albumId) {
 		// TODO Auto-generated method stub
-		return null;
+		return albumdao.search(albumId);
+		
 	}
 
 	@Override
 	public void deleteAlumById(int albumId) {
 		// TODO Auto-generated method stub
-
+		albumdao.delete(albumId);
 	}
 
 	@Override
 	public Album updateAlumNameById(int albumId, String newName) {
 		// TODO Auto-generated method stub
-		return null;
+		Album album = albumdao.search(albumId);
+		album.setName(newName);
+		albumdao.update(album);
+		return album;
 	}
 
 }
