@@ -7,7 +7,7 @@ import com.java.demo.model.entity.Photo;
 public interface PhotoService {
 	
 	// 上传图片到相册
-	void addPhoto(Photo photo, int albumId);
+	void addPhoto(Photo photo);
 	
 	// 获取图片
 	Photo getPhotoById(int photoId);
