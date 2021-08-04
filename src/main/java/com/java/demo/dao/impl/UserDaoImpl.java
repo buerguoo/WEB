@@ -52,8 +52,6 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByName(String username) {
 
 		// 只有在用户唯一的时候才能用
-		User usr = new User();
-		usr.setName(username);
 		QueryWrapper<User> querywrapper = Wrappers.query();
 		querywrapper.like("name", username);
 		
