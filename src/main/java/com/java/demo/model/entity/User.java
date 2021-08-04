@@ -16,9 +16,9 @@ public class User {
 	private String name;
 	
 	// 用户名
-	private String acount;
+	private String account;
 	
 	// 密码
-	private String pswd;
+	private String password;
 }
 
