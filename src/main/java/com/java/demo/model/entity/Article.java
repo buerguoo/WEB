@@ -21,8 +21,8 @@ public class Article {
 	private String content;
 	
 	// 提交时间
-	private Timestamp updateTime;
+	private Timestamp updatetime;
 	
 	// 浏览次数
-	private Integer viewCount;
+	private Integer viewcount;
 }

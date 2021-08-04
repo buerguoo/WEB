@@ -7,6 +7,7 @@ import com.java.demo.dao.ArticleCommentDao;
 import com.java.demo.dao.impl.ArticleCommentDaoImpl;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleCommentService;
+import com.sun.jmx.snmp.Timestamp;
 
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
@@ -32,14 +33,30 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 	}
 
 	@Override
-	public void replyArticleCommentById(int idSource, int idReply,String content) {
+	public void replyArticleCommentById(String username, int replyfloor,String content,int articleId) {
 		// TODO Auto-generated method stub
+		int id = -1;
 		int floor = -1;
 		String nikename = "匿名用户";
-		int acticleId = -1;
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String timeString = df.format(new Date());
-		ArticleComment articleComment = new ArticleComment(floor,idReply,nikename,acticleId,content,timeString);
+		ArticleComment articleComment = null;
+		Collection<ArticleComment> articleComments = articlecommentdao.getAllArticleComments(articleId);
+		for( ArticleComment ac :articleComments)
+		{
+			if(ac.getFloor()>floor)
+				floor = ac.getFloor();
+		}
+		floor = floor+1;
+		articleComments = articlecommentdao.getAll();
+		for( ArticleComment ac:articleComments)
+		{
+			if(ac.getId()>id)
+				id = ac.getId();
+		}
+		id = id+1;
+		
+		long t1 = System.currentTimeMillis();
+		java.sql.Timestamp tp = new java.sql.Timestamp(t1);
+		articleComment = new ArticleComment(id,articleId,floor,replyfloor,content,username,tp);
 		articlecommentdao.insert(articleComment);
 	}
 

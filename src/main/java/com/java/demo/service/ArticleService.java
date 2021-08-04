@@ -22,6 +22,6 @@ public interface ArticleService {
 	boolean updateArticleById(Article article);
 	
 	// 评论次数增加
-	void addCommentCount(int articleId, int commentCount);
+	int getCommentCount(int articleId);
 	
 }

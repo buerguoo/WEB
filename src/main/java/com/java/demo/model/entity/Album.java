@@ -15,7 +15,7 @@ public class Album {
 	private Integer id;
 
 	// 创建时间
-	private Timestamp createTime;
+	private Timestamp createtime;
 	
 	//相册名称
 	private String name;
