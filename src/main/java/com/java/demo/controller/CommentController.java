@@ -11,5 +11,8 @@ import com.java.demo.service.ArticleCommentService;
 @Controller
 public class CommentController {
 
+	@Autowired
+	ArticleCommentService arciArticleCommentService;
 	
+	@RequestMapping("/article/")
 }
