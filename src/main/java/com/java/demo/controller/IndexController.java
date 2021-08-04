@@ -1,23 +1,31 @@
 package com.java.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.java.demo.service.ArticleService;
+import com.java.demo.model.entity.User;
+import com.java.demo.model.utils.ResponseWrapper;
+import com.java.demo.service.UserService;
 
-@Controller
+@RestController
 public class IndexController {
 	
 	@Autowired
-	private ArticleService articleService;
+	private UserService userService;
 	
-	@RequestMapping("/index")
-	public String getEntity() {
+	@RequestMapping("/login/UserLogin")
+	public ResponseWrapper getEntity(@RequestParam("email") String email,
+									@RequestParam("password") String password) {
 		
-	
+		User user = userService.getUserByUsername(email);
 		
-		return null;
+		System.out.println(user);
+		
+		System.out.println(new ResponseWrapper<>(user));
+		
+		return new ResponseWrapper<>(user);
 	}
 	
 }

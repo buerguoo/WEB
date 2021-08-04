@@ -1,8 +1,11 @@
 package com.java.demo.service.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.java.demo.model.entity.User;
 import com.java.demo.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Override
