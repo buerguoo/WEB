@@ -15,6 +15,8 @@ public class IndexController {
 	@RequestMapping("/index")
 	public String getEntity() {
 		
+		
+		
 		return null;
 	}
 	
