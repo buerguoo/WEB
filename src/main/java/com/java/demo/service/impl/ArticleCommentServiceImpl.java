@@ -34,7 +34,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 		// TODO Auto-generated method stub
 		int id = -1;
 		int floor = -1;
-		String nikename = "匿名用户";
+		if(username==null)
+			username = "匿名用户";
 		ArticleComment articleComment = null;
 		Collection<ArticleComment> articleComments = articlecommentdao.getAllArticleComments(articleId);
 		for( ArticleComment ac :articleComments)

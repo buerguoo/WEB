@@ -9,7 +9,6 @@ import com.java.demo.dao.impl.ArticleDaoImpl;
 import com.java.demo.model.entity.Article;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleService;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class ArticleServiceImpl implements ArticleService {
 
