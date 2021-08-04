@@ -1,5 +1,7 @@
 package com.java.demo.model.utils;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public enum ResponseStatus {
 	
 	 /**
