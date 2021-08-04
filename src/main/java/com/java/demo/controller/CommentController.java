@@ -11,12 +11,5 @@ import com.java.demo.service.ArticleCommentService;
 @Controller
 public class CommentController {
 
-	@Autowired
-	private ArticleCommentService articleCommentService;
 	
-	@RequestMapping("/comment/ArticleComment")
-	public String ArticleComment(@RequestParam("art_id")int articleid ,Model model) {
-		
-		return "comment/ArticleComment?art_id="+articleid;
-	}
 }
