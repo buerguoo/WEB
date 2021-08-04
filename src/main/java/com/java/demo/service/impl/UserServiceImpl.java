@@ -1,29 +1,34 @@
 package com.java.demo.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.java.demo.dao.UserDao;
 import com.java.demo.model.entity.User;
 import com.java.demo.service.UserService;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	UserDao userdao ;
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		return userdao.getUserByName(username) ;
 	}
 
 	@Override
 	public User getUserById(int userId) {
 		// TODO Auto-generated method stub
-		return null;
+		return userdao.search(userId);
 	}
 
 	@Override
-	public User upateUserById(int userId) {
+	public User upateUserById(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		userdao.search(user.getId());
+		return user;
 	}
 
 }
