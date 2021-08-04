@@ -12,17 +12,13 @@ import lombok.NoArgsConstructor;
 public class ArticleComment {
 
 	// ID
-	private int floor;
-	
-	// 被回复人的ID
-	private int ReplyFloor;
-	
-	//昵称
-	private String nikename;
 	private Integer id;
 	
+	// 文章id
+	private Integer articleId;
+	
 	// 楼层
-	private Integer floor;
+	private Integer floor;	
 	
 	// 回复楼层
 	private Integer replyFloor;

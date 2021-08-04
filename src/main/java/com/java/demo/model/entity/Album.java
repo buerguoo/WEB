@@ -1,5 +1,7 @@
 package com.java.demo.model.entity;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ public class Album {
 	private Integer id;
 
 	// 创建时间
-	private String createTime;
+	private Timestamp createTime;
 	
 	//相册名称
 	private String name;
