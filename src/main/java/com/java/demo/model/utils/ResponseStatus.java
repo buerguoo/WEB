@@ -1,13 +1,11 @@
 package com.java.demo.model.utils;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 public enum ResponseStatus {
 	
 	 /**
      *  请求成功状态码
      */
-    OK("2000","success"),
+    OK("1010","success"),
 
     /**
      * 请求失败
