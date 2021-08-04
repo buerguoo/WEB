@@ -13,6 +13,4 @@ public class CommentController {
 
 	@Autowired
 	ArticleCommentService arciArticleCommentService;
-	
-	@RequestMapping("/article/")
 }
