@@ -1,10 +1,13 @@
 package com.java.demo.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.java.demo.dao.ArticleCommentDao;
 import com.java.demo.mapper.ArticleCommentMapper;
 import com.java.demo.model.entity.ArticleComment;
@@ -47,4 +50,12 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 		return articleCommentMapper.selectList(null);
 	}
 
+	@Override
+	public List<ArticleComment> getAllArticleComments(int articleid){
+		
+		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
+		queryWrapper.like("articleid",articleid);
+		return articleCommentMapper.selectList(queryWrapper);
+		
+	}
 }
