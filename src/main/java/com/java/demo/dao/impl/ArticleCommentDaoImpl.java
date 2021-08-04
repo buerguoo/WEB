@@ -55,5 +55,6 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
 		queryWrapper.like("articleid",articleid);
 		return articleCommentMapper.selectList(queryWrapper);
+		
 	}
 }
