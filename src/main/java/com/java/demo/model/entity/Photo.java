@@ -21,8 +21,8 @@ public class Photo {
 	private String path;
 	
 	// 相册ID
-	private Integer albumId;
+	private Integer albumid;
 	
 	// 上传时间
-	private Timestamp uploadTime;
+	private Timestamp uploadtime;
 }
