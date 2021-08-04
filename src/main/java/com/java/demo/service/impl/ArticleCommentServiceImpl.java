@@ -1,15 +1,21 @@
 package com.java.demo.service.impl;
 
 import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.java.demo.dao.ArticleCommentDao;
-import com.java.demo.dao.impl.ArticleCommentDaoImpl;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleCommentService;
 
+@Service("ArticleComment")
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
 	//创建数据库操作对象
-	private ArticleCommentDao articlecommentdao = new ArticleCommentDaoImpl();
+	@Autowired
+	private ArticleCommentDao articlecommentdao;
+	
 	@Override
 	public void addArticleComment(ArticleComment articleComment) {
 		// TODO Auto-generated method stub
@@ -34,7 +40,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 		// TODO Auto-generated method stub
 		int id = -1;
 		int floor = -1;
-		String nikename = "匿名用户";
+		if(username==null)
+			username = "匿名用户";
 		ArticleComment articleComment = null;
 		Collection<ArticleComment> articleComments = articlecommentdao.getAllArticleComments(articleId);
 		for( ArticleComment ac :articleComments)

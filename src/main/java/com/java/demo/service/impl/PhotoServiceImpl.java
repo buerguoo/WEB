@@ -1,14 +1,14 @@
 package com.java.demo.service.impl;
 
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.demo.dao.PhotoDao;
 import com.java.demo.model.entity.Photo;
 import com.java.demo.service.PhotoService;
-@Service
+
+@Service("PhotoService")
 public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired

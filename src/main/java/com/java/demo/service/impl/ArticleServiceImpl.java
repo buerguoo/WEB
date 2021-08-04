@@ -2,18 +2,21 @@ package com.java.demo.service.impl;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.java.demo.dao.ArticleCommentDao;
 import com.java.demo.dao.ArticleDao;
 import com.java.demo.dao.impl.ArticleCommentDaoImpl;
-import com.java.demo.dao.impl.ArticleDaoImpl;
 import com.java.demo.model.entity.Article;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleService;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
+@Service("ArticleService")
 public class ArticleServiceImpl implements ArticleService {
-
-	private ArticleDao articledao = new ArticleDaoImpl();
+	
+	@Autowired
+	private ArticleDao articledao;
 	
 	@Override
 	public void addArticle(Article article) {
