@@ -7,7 +7,9 @@ import com.java.demo.dao.ArticleDao;
 import com.java.demo.dao.impl.ArticleCommentDaoImpl;
 import com.java.demo.dao.impl.ArticleDaoImpl;
 import com.java.demo.model.entity.Article;
+import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleService;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class ArticleServiceImpl implements ArticleService {
 
@@ -45,9 +47,11 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void addCommentCount(int articleId, int commentCount) {
+	public int getCommentCount(int articleId) {
 		// TODO Auto-generated method stub
-		
+		ArticleCommentDao acd = new ArticleCommentDaoImpl();
+		Collection<ArticleComment> comments = acd.getAllArticleComments(articleId);
+		return comments.size();
 	}
 
 }
