@@ -12,11 +12,11 @@ public class User {
 	// ID
 	private Integer id;
 	
-	// 角色
-	private String role;
+	// 昵称 用于显示给游客
+	private String name;
 	
 	// 用户名
-	private String name;
+	private String acount;
 	
 	// 密码
 	private String pswd;

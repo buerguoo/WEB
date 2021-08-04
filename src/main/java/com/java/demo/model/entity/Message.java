@@ -9,20 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article {
+public class Message {
 	
 	// id
 	private Integer id;
 	
-	// 标题
-	private String title;
+	// 发布消息的用户名
+	private String username;
 	
 	// 内容
 	private String content;
 	
 	// 提交时间
-	private Timestamp updateTime;
+	private Timestamp posttime;
 	
-	// 浏览次数
-	private Integer viewCount;
 }
