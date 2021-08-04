@@ -10,16 +10,16 @@ import lombok.NoArgsConstructor;
 public class ArticleComment {
 
 	// ID
-	private int id;
+	private Integer id;
 	
 	// 文章ID
-	private int articleId;
+	private Integer articleId;
 	
 	// 内容
 	private String content;
 	
 	// 被回复人的ID
-	private int idReply;
+	private Integer idReply;
 	
 	// 回复时间
 	private String time;

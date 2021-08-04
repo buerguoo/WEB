@@ -19,7 +19,7 @@ public interface ArticleService {
 	void deleteArticleById(int articleId);
 	
 	// 文章更新
-	Article updateArticleById(int articleId);
+	boolean updateArticleById(Article article);
 	
 	// 评论次数增加
 	void addCommentCount(int articleId, int commentCount);

@@ -16,6 +16,6 @@ public interface ArticleCommentService {
 	void deleteArticleCommentById(int articleId);
 	
 	// 回复评论
-	void replyArticleCommentById(int idSource, int idReply);
+	void replyArticleCommentById(int idSource, int idReply,String content);
 	
 }

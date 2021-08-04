@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.java.demo.dao.UserDao;
 import com.java.demo.mapper.UserMapper;
 import com.java.demo.model.entity.User;
-import com.java.demo.model.entity.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -39,11 +38,13 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void update(User entity) {
+		
 		userMapper.updateById(entity);
 	}
 
 	@Override
 	public Collection<User> getAll() {
+		
 		return userMapper.selectList(null);
 	}
 
