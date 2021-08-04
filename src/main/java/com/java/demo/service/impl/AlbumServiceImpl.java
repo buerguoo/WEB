@@ -2,17 +2,18 @@ package com.java.demo.service.impl;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.demo.dao.AlbumDao;
-import com.java.demo.dao.impl.AlbumDaoImpl;
 import com.java.demo.model.entity.Album;
 import com.java.demo.service.AlbumService;
 
 @Service("AlbumService")
 public class AlbumServiceImpl implements AlbumService {
 
-	AlbumDao albumdao = new AlbumDaoImpl();
+	@Autowired
+	AlbumDao albumdao;
 	@Override
 	public void addAlum(Album album) {
 		// TODO Auto-generated method stub
