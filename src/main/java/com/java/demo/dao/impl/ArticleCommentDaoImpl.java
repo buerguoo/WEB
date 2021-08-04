@@ -50,6 +50,7 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 		return articleCommentMapper.selectList(null);
 	}
 
+	@Override
 	public List<ArticleComment> getAllArticleComments(int articleid){
 		
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
