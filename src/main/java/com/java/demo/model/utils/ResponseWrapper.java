@@ -1,9 +1,5 @@
 package com.java.demo.model.utils;
 
-import java.util.List;
-
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-
 import io.swagger.annotations.ApiModelProperty;
 
 public class ResponseWrapper<T> {
@@ -63,29 +59,9 @@ public class ResponseWrapper<T> {
 
     @Override
     public String toString() {
-        String returnString = "ResponseWrapper{" +
-                "status='" + code + '\'' +
-                ", message='" + message + '\'';
-        if (data instanceof List) {
-            if(((List) data).size()>5){
-                return returnString +
-                        ", dataSize=" + ((List) data).size() +
-                        '}';
-            }
-        } else if (data instanceof PageResult) {
-            if (CollectionUtils.isEmpty(((PageResult) data).getData())) {
-                return returnString +
-                        ", totalCount=" + ((PageResult) data).getTotalCount() +
-                        ", dataSize=" + 0 +
-                        '}';
-            }
-            return returnString +
-                    ", totalCount=" + ((PageResult) data).getTotalCount() +
-                    ", dataSize=" + ((PageResult) data).getData().size() +
-                    '}';
-        }
+    	
         return "ResponseWrapper{" +
-                "status='" + code + '\'' +
+                "code='" + code + '\'' +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
