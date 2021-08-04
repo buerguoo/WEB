@@ -1,5 +1,7 @@
 package com.java.demo.model.entity;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,15 +21,18 @@ public class ArticleComment {
 	private String nikename;
 	private Integer id;
 	
-	// 文章ID
-	private Integer articleId;
+	// 楼层
+	private Integer floor;
+	
+	// 回复楼层
+	private Integer replyFloor;
 	
 	// 内容
 	private String content;
 	
-	// 被回复人的ID
-	private Integer idReply;
+	// 发布人的名字
+	private String username;
 	
 	// 回复时间
-	private String time;
+	private Timestamp posttime;
 }
