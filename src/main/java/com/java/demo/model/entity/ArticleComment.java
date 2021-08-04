@@ -17,13 +17,16 @@ public class ArticleComment {
 	
 	//昵称
 	private String nikename;
+	private Integer id;
 	
 	// 文章ID
-	private int articleId;
+	private Integer articleId;
 	
 	// 内容
 	private String content;
 	
+	// 被回复人的ID
+	private Integer idReply;
 	
 	// 回复时间
 	private String time;

@@ -22,17 +22,20 @@ public class ArticleDaoImpl implements ArticleDao {
 
 	@Override
 	public Collection<Article> getAll() {
+		
 		return articleMapper.selectList(null);
 	}
 
 	@Override
 	public void insert(Article entity) {
+		
 		articleMapper.insert(entity);
 		
 	}
 
 	@Override
 	public Article search(int id) {
+		
 		return articleMapper.selectById(id);
 	}
 
@@ -44,6 +47,7 @@ public class ArticleDaoImpl implements ArticleDao {
 
 	@Override
 	public void delete(int id) {
+		
 		articleMapper.deleteById(id);
 		
 	}

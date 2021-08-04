@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Album {
 
 	// ID
-	private int id;
+	private Integer id;
 	
 	// 主人
 	private String owner;

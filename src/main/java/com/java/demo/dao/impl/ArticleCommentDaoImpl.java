@@ -17,7 +17,7 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 	
 	@Override
 	public void insert(ArticleComment entity) {
-
+		
 		articleCommentMapper.insert(entity);
 
 	}
@@ -43,6 +43,7 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 
 	@Override
 	public Collection<ArticleComment> getAll() {
+		
 		return articleCommentMapper.selectList(null);
 	}
 

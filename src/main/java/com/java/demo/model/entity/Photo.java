@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Photo {
 	
 	// ID
-	private int id;
+	private Integer id;
 	
 	// 名称
 	private String name;
@@ -19,5 +19,5 @@ public class Photo {
 	private String path;
 	
 	// 相册ID
-	private int album;
+	private Integer album;
 }
