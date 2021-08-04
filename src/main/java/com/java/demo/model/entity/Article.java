@@ -15,7 +15,7 @@ public class Article {
 	private Integer id;
 	
 	// 标题
-	private String title;
+	private String name;
 	
 	// 内容
 	private String content;

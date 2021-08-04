@@ -1,13 +1,10 @@
 package com.java.demo.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.*;
 import com.java.demo.dao.ArticleCommentDao;
 import com.java.demo.dao.impl.ArticleCommentDaoImpl;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleCommentService;
-import com.sun.jmx.snmp.Timestamp;
 
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
