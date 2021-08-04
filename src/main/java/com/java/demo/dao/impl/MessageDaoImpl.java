@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.java.demo.dao.MessageDao;
-import com.java.demo.mapper.PhotoMapper;
-import com.java.demo.model.entity.Photo;
+import com.java.demo.mapper.MessageMapper;
+import com.java.demo.model.entity.Message;
+
 @Repository
 public class MessageDaoImpl implements MessageDao {
 
