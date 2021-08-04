@@ -37,12 +37,14 @@ public class PhotoDaoImpl implements PhotoDao {
 
 	@Override
 	public void update(Photo entity) {
+		
 		photoMapper.updateById(entity);
 	}
 
 	@Override
 	public Collection<Photo> getAll() {
+		
 		return photoMapper.selectList(null);
 	}
-
+	
 }

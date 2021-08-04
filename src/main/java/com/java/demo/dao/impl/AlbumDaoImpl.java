@@ -17,7 +17,9 @@ public class AlbumDaoImpl implements AlbumDao {
 	
 	@Override
 	public void insert(Album entity) {
-	albumMapper.insert(entity);
+		
+		// 插入相册
+		albumMapper.insert(entity);
 	}
 
 	@Override
@@ -42,6 +44,8 @@ public class AlbumDaoImpl implements AlbumDao {
 
 	@Override
 	public Collection<Album> getAll() {
+		
+		// 返回所有的相册列表
 		return albumMapper.selectList(null);
 	}
 
