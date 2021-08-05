@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,8 +22,8 @@ import com.sun.org.apache.bcel.internal.generic.RETURN;
 public class ArticleController {
 	@Autowired
 	ArticleService articleService;
-	
-	
+	//获取所有文章信息
+	@CrossOrigin
 	@RequestMapping({"/article/ArticleAll","/nav/ActiveClassAllData"})
 	public ResponseWrapper<Collection<Article>> ShowArticleList()
 	{
@@ -30,7 +31,8 @@ public class ArticleController {
 		ResponseWrapper<Collection<Article>> responseWrapper = new ResponseWrapper<Collection<Article>>(articles);
 		return responseWrapper;
 	}
-	
+	//根据id获取文章信息
+	@CrossOrigin
 	@RequestMapping("/article/getArticleInfo")
 	public ResponseWrapper<Article> ShowArticleInfo(@PathVariable("art_id") int articleId)
 	{
@@ -44,7 +46,8 @@ public class ArticleController {
 		}
 		return responseWrapper;
 	}
-	
+	//获取前number个评论最多的文章
+	@CrossOrigin
 	@RequestMapping("/article/ShowArtCommentCount")
 	public ResponseWrapper<List<Article>> ShowMostPopularArticle(int number)
 	{
