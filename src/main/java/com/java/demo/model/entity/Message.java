@@ -14,13 +14,10 @@ public class Message {
 	// id
 	private Integer id;
 	
-	// 发布消息的用户名
-	private String username;
-	
 	// 内容
 	private String content;
 	
 	// 提交时间
-	private Timestamp posttime;
+	private Timestamp postTime;
 	
 }

@@ -15,22 +15,19 @@ import lombok.NoArgsConstructor;
 public class ArticleComment {
 
 	// ID
-	private Integer id;
+	private Integer commentId;
 	
 	// 文章id
-	private Integer articleid;
+	private Integer artId;
 	
-	// 楼层
-	private Integer floor;	
+	// 用户id
+	private Integer userId;	
 	
-	// 回复楼层
-	private Integer replyfloor;
+	// 回复id
+	private Integer replyId;
 	
 	// 内容
 	private String content;
-	
-	// 发布人的名字
-	private String username;
 	
 	// 回复时间
 	private Timestamp posttime;

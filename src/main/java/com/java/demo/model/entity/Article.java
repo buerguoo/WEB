@@ -20,15 +20,15 @@ public class Article {
 	//标签
 	private String label;
 	
-	// 内容
-	private String content;
-	
-	// 提交时间
-	private Timestamp updatetime;
-	
 	// 浏览次数
 	private Integer viewCount;
 	
 	//评论次数
 	private Integer commentCount;
+	
+	// 内容
+	private String content;
+	
+	// 提交时间
+	private Timestamp postTime;
 }
