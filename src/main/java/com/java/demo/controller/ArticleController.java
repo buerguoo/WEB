@@ -16,7 +16,6 @@ import com.java.demo.model.entity.Article;
 import com.java.demo.model.utils.ResponseStatus;
 import com.java.demo.model.utils.ResponseWrapper;
 import com.java.demo.service.ArticleService;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 @Controller
 public class ArticleController {
@@ -52,7 +51,7 @@ public class ArticleController {
 	public ResponseWrapper<List<Article>> ShowMostPopularArticle(int number)
 	{
 		Collection<Article> articles = articleService.getAllArticles();
-		List as = new ArrayList<Article>();
+		List<Article> as = new ArrayList<Article>();
 		for(Article a:articles)
 			as.add(a);
 		Collections.sort(as,new Comparator<Article>() {
@@ -72,6 +71,6 @@ public class ArticleController {
 		if(as.size()<number)
 			return new ResponseWrapper<List<Article>>(as);
 		else 
-			return new ResponseWrapper(as.subList(0, number));
+			return new ResponseWrapper<List<Article>>(as.subList(0, number));
 	}
 }
