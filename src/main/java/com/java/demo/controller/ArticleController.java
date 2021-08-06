@@ -29,7 +29,8 @@ public class ArticleController {
 		Collection<Article> articles = articleService.getAllArticles();
 		ResponseWrapper<Collection<Article>> responseWrapper = new ResponseWrapper<Collection<Article>>(articles);
 		return responseWrapper;
-	}
+	}	
+	
 	//根据id获取文章信息
 	@CrossOrigin
 	@RequestMapping("/article/getArticleInfo")
@@ -45,6 +46,7 @@ public class ArticleController {
 		}
 		return responseWrapper;
 	}
+	
 	//获取前number个评论最多的文章
 	@CrossOrigin
 	@RequestMapping("/article/ShowArtCommentCount")
