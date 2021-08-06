@@ -10,15 +10,21 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	// ID
-	private Integer id;
-	
-	// 昵称 用于显示给游客
-	private String name;
+	private Integer userId;
 	
 	// 用户名
-	private String account;
+	private String username;
+	
+	// 
+	private String email;
 	
 	// 密码
 	private String password;
+	
+	private String avatar;
+	
+	private String label;
+	
+	private Integer sex;
 }
 

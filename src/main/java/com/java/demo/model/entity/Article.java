@@ -12,10 +12,13 @@ import lombok.NoArgsConstructor;
 public class Article {
 	
 	// id
-	private Integer id;
+	private Integer artId;
 	
 	// 标题
-	private String name;
+	private String articleName;
+	
+	//标签
+	private String label;
 	
 	// 内容
 	private String content;
@@ -24,5 +27,8 @@ public class Article {
 	private Timestamp updatetime;
 	
 	// 浏览次数
-	private Integer viewcount;
+	private Integer viewCount;
+	
+	//评论次数
+	private Integer commentCount;
 }
