@@ -30,7 +30,8 @@ public class ArticleController {
 		Collection<Article> articles = articleService.getAllArticles();
 		ResponseWrapper<Collection<Article>> responseWrapper = new ResponseWrapper<Collection<Article>>(articles);
 		return responseWrapper;
-	}
+	}	
+	
 	//根据id获取文章信息
 	@CrossOrigin
 	@RequestMapping("/article/getArticleInfo")
@@ -46,10 +47,11 @@ public class ArticleController {
 		}
 		return responseWrapper;
 	}
+	
 	//获取前number个评论最多的文章
 	@CrossOrigin
 	@RequestMapping("/article/ShowArtCommentCount")
-	public ResponseWrapper<List<Article>> ShowMostPopularArticle(int number)
+	public ResponseWrapper ShowMostPopularArticle(int number)
 	{
 		Collection<Article> articles = articleService.getAllArticles();
 		List as = new ArrayList<Article>();
@@ -72,6 +74,6 @@ public class ArticleController {
 		if(as.size()<number)
 			return new ResponseWrapper<List<Article>>(as);
 		else 
-			return new ResponseWrapper(as.subList(0, number));
+			return new ResponseWrapper<>(as.subList(0, number));
 	}
 }

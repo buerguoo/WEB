@@ -22,9 +22,18 @@ public enum ResponseStatus {
      */
     FAIL_4003("4003","无权限"),
 
-    FAIL_6001("6001","发布文章超过当日次数");
-
-
+    FAIL_6001("6001","发布文章超过当日次数"),
+	
+	/**
+     * 密码错误
+	 */
+	FAIL_2008("2008", "密码错误"),
+	
+	/**
+     *用户名错误 
+	 */
+	FIAL_2007("2007", "用户名错误");
+	
     private final String value;
 
     private final String reasonPhrase;
