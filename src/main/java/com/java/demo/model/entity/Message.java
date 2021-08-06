@@ -2,6 +2,8 @@ package com.java.demo.model.entity;
 
 import java.sql.Timestamp;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ public class Message {
 	private String content;
 	
 	// 提交时间
+	@TableField("postTime")
 	private Timestamp postTime;
 	
 }

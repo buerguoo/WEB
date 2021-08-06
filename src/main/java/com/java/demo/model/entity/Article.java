@@ -18,6 +18,7 @@ public class Article {
 	private Integer artId;
 	
 	// 标题
+	@TableField("articleName")
 	private String articleName;
 	
 	//标签
