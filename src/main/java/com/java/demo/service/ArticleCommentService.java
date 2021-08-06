@@ -1,5 +1,6 @@
 package com.java.demo.service;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import com.java.demo.model.entity.ArticleComment;
@@ -16,6 +17,8 @@ public interface ArticleCommentService {
 	void deleteArticleCommentById(int articleId);
 	
 	// 回复评论
-	void replyArticleCommentById(String username, int replyfloor,String content,int articleID);
+	public void replyArticleCommentById(Integer artId,Integer userId, Integer replyId,String content,Timestamp posttime);
 	
+	//获取当前评论id最大值
+	public int  getMaxCommentId();
 }

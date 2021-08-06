@@ -71,5 +71,10 @@ public class CommentController {
 		return null;
 	}
 	
-	// 
+	//  獲取最大評論Id
+	@CrossOrigin
+	@GetMapping("comment/test")
+	public void testmax() {
+		arciArticleCommentService.getMaxCommentId();
+	}
 }

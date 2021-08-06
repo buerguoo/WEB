@@ -3,6 +3,7 @@ package com.java.demo.dao.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -58,4 +59,14 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 		return articleCommentMapper.selectList(queryWrapper);
 		
 	}
+
+	@Override
+	public int getMaxCommentId() {
+
+		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
+		queryWrapper.select("MAX(commentId) as max");
+		System.out.println(articleCommentMapper.selectOne(queryWrapper));
+		return 1234;
+	}
+
 }
