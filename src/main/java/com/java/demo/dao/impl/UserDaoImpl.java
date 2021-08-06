@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
 
 		// 只有在用户唯一的时候才能用
 		QueryWrapper<User> querywrapper = Wrappers.query();
-		querywrapper.like("email", username);
+		querywrapper.like("username", username);
 		
 		return userMapper.selectOne(querywrapper);
 	}
