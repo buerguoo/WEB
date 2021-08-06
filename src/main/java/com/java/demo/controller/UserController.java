@@ -24,15 +24,18 @@ public class UserController {
 	public ResponseWrapper<User> userInfo(@RequestParam("user_id") String userId) {
 		
 		User user = null;
-		
-		if(!userId.equals("undefined") && !userId.equals("")) {
+				
+		if(!userId.equals("undefined") && !userId.equals("") && userId != null) {
+			
 			user = userService.getUserById(Integer.valueOf(userId));
 		}
 		return new ResponseWrapper<>(user);
 	}
 	
 	// 修改用户信息
-	// 不匹配 无法进行
+	// 不匹配 无法进行 前端不合理？
+	@CrossOrigin
+	@GetMapping("/Userinfo/UserInfoSave")
 	public ResponseWrapper<User> userInfoUpdate(){
 		
 		return null;
