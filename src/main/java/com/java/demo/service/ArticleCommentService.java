@@ -18,7 +18,4 @@ public interface ArticleCommentService {
 	
 	// 回复评论
 	public void replyArticleCommentById(Integer artId,Integer userId, Integer replyId,String content,Timestamp posttime);
-	
-	//获取当前评论id最大值
-	public int  getMaxCommentId();
 }

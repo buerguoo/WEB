@@ -13,5 +13,6 @@ public interface ArticleCommentDao extends Basedao<ArticleComment>{
 	
 	public List<ArticleComment> getAllArticleComments(int articleid);
 	
-	public int getMaxCommentId();
+	// 获取当前最大的commitId
+	public Integer getMaxCommentId();
 }

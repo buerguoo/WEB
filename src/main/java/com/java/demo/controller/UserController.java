@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.demo.model.entity.User;
-import com.java.demo.model.entity.test;
+
 import com.java.demo.model.utils.ResponseWrapper;
 import com.java.demo.service.UserService;
 

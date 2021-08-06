@@ -71,11 +71,5 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 //		articlecommentdao.insert(articleComment);
 	}
 
-	@Override
-	public int getMaxCommentId() {
-		// TODO Auto-generated method stub
-		return articlecommentdao.getMaxCommentId();
-	}
-
 
 }

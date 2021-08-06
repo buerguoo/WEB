@@ -61,12 +61,11 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 	}
 
 	@Override
-	public int getMaxCommentId() {
+	public Integer getMaxCommentId() {
 
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
 		queryWrapper.select("MAX(commentId) as max");
-		System.out.println(articleCommentMapper.selectOne(queryWrapper));
-		return 1234;
+		return (Integer)articleCommentMapper.selectObjs(queryWrapper).get(0);
 	}
 
 }
