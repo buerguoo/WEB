@@ -23,9 +23,10 @@ public class CommentController {
 										@RequestParam("comment_id") String commentId) {
 		
 		// 获取单个评论, 需要增加业务
-		ArticleComment articleComment = arciArticleCommentService.getAticleComment(articleId, commentId)
+		//ArticleComment articleComment = arciArticleCommentService.getAticleComment(articleId, commentId)
 		
-		return new ResponseWrapper<ArticleComment>(articleComment)
+		//return new ResponseWrapper<ArticleComment>(articleComment)
+		return null;
 	}
 	
 	// 查询其他评论数据
@@ -34,9 +35,10 @@ public class CommentController {
 	public ResponseWrapper<ArticleComment> OtherComment(@RequestParam("leave_id") String leaveId, 
 														@RequestParam("comment_id") String commentId){
 		// 获取其他评论
-		ArticleComment articleComment = arciArticleCommentService.getOtherCommet(leaveId, commentId);
+		//ArticleComment articleComment = arciArticleCommentService.getOtherCommet(leaveId, commentId);
 		
-		return new ResponseWrapper<ArticleComment>(articleComment);
+		//return new ResponseWrapper<ArticleComment>(articleComment);
+		return null;
 	}
 	
 	// 添加文章评论
@@ -49,10 +51,10 @@ public class CommentController {
 											@RequestParam("pid") String pId) {
 		// pid 是什么？
 		// ...
-		arciArticleCommentService.addArticleComment(new ArticleComment(id, articleId, floor, replyfloor, content, username, posttime));
+		//arciArticleCommentService.addArticleComment(new ArticleComment(id, articleId, floor, replyfloor, content, username, posttime));
 		
-		return new ResponseWrapper<>(null);
-		 
+		//return new ResponseWrapper<>(null);
+		return null;
 	}
 	
 	// 添加其他评论
@@ -68,4 +70,6 @@ public class CommentController {
 		
 		return null;
 	}
+	
+	// 
 }
