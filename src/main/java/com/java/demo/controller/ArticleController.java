@@ -61,7 +61,7 @@ public class ArticleController {
 	@RequestMapping("/article/ShowArtCommentCount")
 	public ResponseWrapper<List<Article>> ShowMostPopularArticle(int number)
 	{
-		Collection<Article> articles = articleService.getAllArticles();
+		List<Article> articles = articleService.getAllArticles();
 		List<Article> as = new ArrayList<Article>();
 		for(Article a:articles)
 			as.add(a);
@@ -87,10 +87,10 @@ public class ArticleController {
 	
 	@CrossOrigin
 	@RequestMapping("/article/ArtClassData")
-	public ResponseWrapper<Collection<Article>> ShowArtClassSearch(@RequestParam(value="label",required = false) String label )
+	public ResponseWrapper<List<Article>> ShowArtClassSearch(@RequestParam(value="label",required = false) String label )
 	{
-		Collection<Article> as = articleService.getArticlesByLabel(label);
-		return new ResponseWrapper<Collection<Article>>(as);
+		List<Article> as = articleService.getArticlesByLabel(label);
+		return new ResponseWrapper<List<Article>>(as);
 //		System.out.println(id);
 //		return null;
 	}

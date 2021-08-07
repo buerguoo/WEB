@@ -1,6 +1,6 @@
 package com.java.demo.service.impl;
 
-import java.util.Collection;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public  class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Collection<Article> getAllArticles() {
+	public List<Article> getAllArticles() {
 		// TODO Auto-generated method stub
 		return articledao.getAll();
 	}
@@ -54,7 +54,7 @@ public  class ArticleServiceImpl implements ArticleService {
 	public int getCommentCount(int articleId) {
 		// TODO Auto-generated method stub
 		ArticleCommentDao acd = new ArticleCommentDaoImpl();
-		Collection<ArticleComment> comments = acd.getAllArticleComments(articleId);
+		List<ArticleComment> comments = acd.getAllArticleComments(articleId);
 		return comments.size();
 	}
 

@@ -1,6 +1,6 @@
 package com.java.demo.service;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.java.demo.model.entity.Album;
 
@@ -11,7 +11,7 @@ public interface AlbumService {
 	
 	// 获取全部相册
 	// 考虑获得名字 还是实体?
-	Collection<Album> getAllAlbum();
+	List<Album> getAllAlbum();
 	
 	// 获取某个相册
 	Album getAlbumById(int albumId);

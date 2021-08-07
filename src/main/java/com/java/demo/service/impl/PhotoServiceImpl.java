@@ -1,6 +1,7 @@
 package com.java.demo.service.impl;
 
-import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public Collection<Photo> getPhotos(int albumId) {
+	public List<Photo> getPhotos(int albumId) {
 		// TODO Auto-generated method stub
 		return photoDao.getAll();
 	}
