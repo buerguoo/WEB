@@ -2,6 +2,7 @@ package com.java.demo.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class CommentController {
 	// 查询文章评论数据
 	@CrossOrigin
 	@GetMapping("/comment/ArticleComment")
-	public ResponseWrapper<List<ArticleComment>> ArticleComment(@RequestParam("art_id") String articleId,
-										@RequestParam("comment_id") String commentId) {
+	public ResponseWrapper<Collection<ArticleComment>> ArticleComment(@RequestParam("art_id") String articleId,
+																@RequestParam("comment_id") String commentId) {
 		
 		// 获取文章评论, 需要增加业务
-		List<ArticleComment> articleComments = arciArticleCommentService.getArticleCommentsByArticleId(Integer.valueOf(articleId));
+		Collection<ArticleComment> articleComments = arciArticleCommentService.getAllArticleComments(Integer.valueOf(articleId));
 		
-		return new ResponseWrapper<List<ArticleComment>>(articleComments);
+		return new ResponseWrapper<Collection<ArticleComment>>(articleComments);
 	}
 	
 	// 查询其他评论数据
@@ -39,7 +40,7 @@ public class CommentController {
 	public ResponseWrapper<List<ArticleComment>> OtherComment(@RequestParam("leave_id") String leaveId, 
 														@RequestParam("comment_id") String commentId){
 		// 获取其他评论
-		List<ArticleComment> articleComments = arciArticleCommentService.getArticleCommentsByLeaveId(Integer.valueOf(leaveId));
+		List<ArticleComment> articleComments = arciArticleCommentService.getAllArticleCommentsByType(Integer.valueOf(leaveId));
 		
 		return new ResponseWrapper<List<ArticleComment>>(articleComments);
 	}
