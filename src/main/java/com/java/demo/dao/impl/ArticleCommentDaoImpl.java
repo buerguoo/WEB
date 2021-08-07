@@ -67,4 +67,10 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 		return (Integer)articleCommentMapper.selectObjs(queryWrapper).get(0);
 	}
 
+	@Override
+	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveid){
+		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
+		queryWrapper.like("leaveid",leaveid);
+		return articleCommentMapper.selectList(queryWrapper);
+	}
 }

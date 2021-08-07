@@ -22,7 +22,7 @@ create table Article(
     `articleName` char(32),#文章名
     `label` char(32),#标签
     `viewCount` int,#浏览次数
-    `commmentCount` int,#评论次数
+    `commentCount` int,#评论次数
     `content` text,
 	`posttime` TIMESTAMP,
     primary key(`article_id`));
