@@ -43,10 +43,7 @@ public class CommentController {
 
 		List<ArticleCommentResponse> articleCommentResponses = new LinkedList<ArticleCommentResponse>();
 
-
-		for (int i = 0; i < articleComments.size(); i++) {
-
-			ArticleComment articleComment = articleComments.get(articleComments.size() - 1 - i);
+		for (ArticleComment articleComment : articleComments) {
 
 			User user = userService.getUserById(articleComment.getUserId());
 
