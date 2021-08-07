@@ -26,13 +26,13 @@ public class UserController {
 		
 		User user = null;
 		
-		System.out.println(userId);
+		//System.out.println(userId);
 		
 		if(!userId.equals("undefined") && !userId.equals("") && userId != null) {
 						
 			user = userService.getUserById(Integer.valueOf(userId));
 			
-			System.out.println(user);
+			//System.out.println(user);
 			
 		}
 		return new ResponseWrapper<>(user);
@@ -46,18 +46,14 @@ public class UserController {
 												@RequestParam("email") String email,
 												@RequestParam("sex") String sex,
 												@RequestParam("label") String label){
-		System.out.println(email);
 		
-		User oldUser = userService.getUserByUsername(email);
+		User oldUser = userService.getUserByEmail(email);
 		
-		System.out.println(oldUser);
 		
 		User newUser = new User(oldUser.getUserId(), username, oldUser.getPassword(), email, avatar, label, Integer.valueOf(sex));
 		
 		userService.upateUserById(newUser);
-		
-		System.out.println(newUser);
-		
+				
 		return new ResponseWrapper<>(newUser);
 	}
 		

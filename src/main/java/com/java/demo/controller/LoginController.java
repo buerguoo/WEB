@@ -23,7 +23,7 @@ public class LoginController {
 	public ResponseWrapper loginCheckout(@RequestParam("email") String email,
 										@RequestParam("password") String password){
 				
-		User user = userService.getUserByUsername(email);
+		User user = userService.getUserByEmail(email);
 		
 		System.out.println(user);
 		
