@@ -23,7 +23,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	
 
 	@Override
-	public Collection<Article> getAll() {
+	public List<Article> getAll() {
 		
 		return articleMapper.selectList(null);
 	}

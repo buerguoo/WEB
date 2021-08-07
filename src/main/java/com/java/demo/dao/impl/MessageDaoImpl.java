@@ -1,6 +1,7 @@
 package com.java.demo.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,7 +44,7 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public Collection<Message> getAll() {
+	public List<Message> getAll() {
 		
 		return messageMapper.selectList(null);
 		

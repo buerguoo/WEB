@@ -1,6 +1,5 @@
 package com.java.demo.service.impl;
 
-import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 	}
 
 	@Override
-	public Collection<ArticleComment> getAllArticleComments(int articleId) {
+	public List<ArticleComment> getAllArticleComments(int articleId) {
 		// TODO Auto-generated method stub
 		return articlecommentdao.getAll();
 	}

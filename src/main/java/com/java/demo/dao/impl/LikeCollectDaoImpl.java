@@ -50,7 +50,7 @@ public class LikeCollectDaoImpl implements LikeCollectDao {
 	}
 
 	@Override
-	public Collection<LikeCollect> getAll() {
+	public List<LikeCollect> getAll() {
 		// TODO Auto-generated method stub
 		return lcmapper.selectList(null);
 	}

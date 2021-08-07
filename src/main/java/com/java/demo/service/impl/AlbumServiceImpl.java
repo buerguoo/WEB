@@ -1,6 +1,6 @@
 package com.java.demo.service.impl;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,9 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 
 	@Override
-	public Collection<Album> getAllAlbum() {
+	public List<Album> getAllAlbum() {
 		// TODO Auto-generated method stub
-		Collection<Album> albums = albumdao.getAll();
+		List<Album> albums = albumdao.getAll();
 		return albums;
 	}
 

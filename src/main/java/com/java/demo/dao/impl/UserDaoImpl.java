@@ -1,6 +1,7 @@
 package com.java.demo.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public Collection<User> getAll() {
+	public List<User> getAll() {
 		
 		return userMapper.selectList(null);
 	}

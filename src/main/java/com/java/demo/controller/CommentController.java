@@ -38,11 +38,10 @@ public class CommentController {
 			@RequestParam("comment_id") String commentId) {
 
 		// 获取文章评论, 需要增加业务
-		Collection<ArticleComment> articleComments = arciArticleCommentService
+		List<ArticleComment> articleComments = arciArticleCommentService
 				.getAllArticleComments(Integer.valueOf(articleId));
 
 		List<ArticleCommentResponse> articleCommentResponses = new LinkedList<ArticleCommentResponse>();
-
 
 		for (int i = 0; i < articleComments.size(); i++) {
 

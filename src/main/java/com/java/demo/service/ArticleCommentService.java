@@ -1,7 +1,6 @@
 package com.java.demo.service;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
 
 import com.java.demo.model.entity.ArticleComment;
@@ -13,7 +12,7 @@ public interface ArticleCommentService {
 	void addArticleComment(ArticleComment articleComment);
 	
 	// 获得当前文章下的评论
-	Collection<ArticleComment> getAllArticleComments(int articleId);
+	List<ArticleComment> getAllArticleComments(int articleId);
 	
 	// 获取单个评论
 	ArticleComment getArticleCommentById(Integer commentId);
