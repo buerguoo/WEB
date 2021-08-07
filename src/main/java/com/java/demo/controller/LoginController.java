@@ -25,6 +25,8 @@ public class LoginController {
 				
 		User user = userService.getUserByUsername(email);
 		
+		System.out.println(user);
+		
 		if(user == null) {
 			// 未查询该用户
 			return new ResponseWrapper<>(ResponseStatus.FIAL_2007, "fail");	

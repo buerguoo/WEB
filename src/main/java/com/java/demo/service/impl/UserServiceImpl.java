@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userdao ;
 	@Override
-	public User getUserByUsername(String username) {
+	public User getUserByEmail(String email) {
 		// TODO Auto-generated method stub
-		return userdao.getUserByName(username) ;
+		return userdao.getUserByEmail(email) ;
 	}
 
 	@Override
