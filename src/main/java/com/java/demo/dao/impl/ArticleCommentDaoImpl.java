@@ -54,7 +54,7 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 	public List<ArticleComment> getAllArticleComments(int articleid){
 		
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
-		queryWrapper.like("articleid",articleid);
+		queryWrapper.like("artid",articleid);
 		return articleCommentMapper.selectList(queryWrapper);
 		
 	}
@@ -63,7 +63,7 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 	public Integer getMaxCommentId() {
 
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
-		queryWrapper.select("MAX(commentId) as max");
+		queryWrapper.select("MAX(`Id`) as max");
 		return (Integer)articleCommentMapper.selectObjs(queryWrapper).get(0);
 	}
 

@@ -26,10 +26,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User search(int id) {
 		
-		QueryWrapper<User> querywrapper = Wrappers.query();
-		querywrapper.like("userId", id);	
+		return userMapper.selectById(id);
 		
-		return userMapper.selectOne(querywrapper);
 	}
 
 	@Override

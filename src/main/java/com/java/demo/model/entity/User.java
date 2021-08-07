@@ -1,6 +1,7 @@
 package com.java.demo.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	// ID
-	@TableField("userId")
+	@TableId
 	private Integer userId;
 	
 	// 用户名

@@ -33,7 +33,7 @@ public class LikeCollectDaoImpl implements LikeCollectDao {
 	public List<LikeCollect> searchLikeCollectlist(int id)
 	{
 		QueryWrapper<LikeCollect> queryWrapper = new QueryWrapper<>();
-		queryWrapper.eq("userId", id);
+		queryWrapper.eq("Id", id);
 		return lcmapper.selectList(queryWrapper);
 	}
 

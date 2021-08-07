@@ -47,16 +47,18 @@ public class UserController {
 												@RequestParam("sex") String sex,
 												@RequestParam("label") String label){
 		System.out.println(email);
-		
+		System.out.println("\n\n\n"+username+avatar+email+sex+label+"\n\n\n");
 		User oldUser = userService.getUserByEmail(email);
 		
 		System.out.println(oldUser);
 		
 		User newUser = new User(oldUser.getUserId(), username, oldUser.getPassword(), email, avatar, label, Integer.valueOf(sex));
 		
-		userService.upateUserById(newUser);
 		
-		System.out.println(newUser);
+		System.out.println("new User: "+newUser);
+		userService.upateUser(newUser);
+		
+		
 		
 		return new ResponseWrapper<>(newUser);
 	}

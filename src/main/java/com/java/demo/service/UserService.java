@@ -11,6 +11,6 @@ public interface UserService {
 	User getUserById(int userId);
 	
 	// 更新用户信息
-	User upateUserById(User user);
+	User upateUser(User user);
 	
 }
