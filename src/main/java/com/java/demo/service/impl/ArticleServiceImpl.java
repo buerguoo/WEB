@@ -1,6 +1,7 @@
 package com.java.demo.service.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleService;
 
 @Service("ArticleService")
-public class ArticleServiceImpl implements ArticleService {
+public  class ArticleServiceImpl implements ArticleService {
 	
 	@Autowired
 	private ArticleDao articledao;
@@ -55,6 +56,12 @@ public class ArticleServiceImpl implements ArticleService {
 		ArticleCommentDao acd = new ArticleCommentDaoImpl();
 		Collection<ArticleComment> comments = acd.getAllArticleComments(articleId);
 		return comments.size();
+	}
+
+	@Override
+	public List<Article> getArticlesByLabel(String label) {
+		// TODO Auto-generated method stub
+		return articledao.search(label);
 	}
 
 }

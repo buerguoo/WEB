@@ -1,6 +1,7 @@
 package com.java.demo.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.java.demo.model.entity.Article;
 
@@ -23,5 +24,7 @@ public interface ArticleService {
 	
 	// 评论次数增加
 	int getCommentCount(int articleId);
+
+	List<Article> getArticlesByLabel(String label);
 	
 }
