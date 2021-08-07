@@ -1,5 +1,8 @@
 package com.java.demo.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +26,9 @@ public class CommentController {
 										@RequestParam("comment_id") String commentId) {
 		
 		// 获取单个评论, 需要增加业务
-		//ArticleComment articleComment = arciArticleCommentService.getAticleComment(articleId, commentId)
+		ArticleComment articleComment = arciArticleCommentService.getArticleCommentById(Integer.valueOf(commentId));
 		
-		//return new ResponseWrapper<ArticleComment>(articleComment)
-		return null;
+		return new ResponseWrapper<ArticleComment>(articleComment);
 	}
 	
 	// 查询其他评论数据
@@ -35,16 +37,15 @@ public class CommentController {
 	public ResponseWrapper<ArticleComment> OtherComment(@RequestParam("leave_id") String leaveId, 
 														@RequestParam("comment_id") String commentId){
 		// 获取其他评论
-		//ArticleComment articleComment = arciArticleCommentService.getOtherCommet(leaveId, commentId);
+		ArticleComment articleComment = arciArticleCommentService.getArticleCommentById(Integer.valueOf(commentId));
 		
-		//return new ResponseWrapper<ArticleComment>(articleComment);
-		return null;
+		return new ResponseWrapper<ArticleComment>(articleComment);
 	}
 	
 	// 添加文章评论
 	@CrossOrigin
 	@GetMapping("/comment/setArticleComment")
-	public ResponseWrapper setArticleCommet(@RequestParam("content") String content,
+	public ResponseWrapper<ArticleComment> setArticleCommet(@RequestParam("content") String content,
 											@RequestParam("user_id") String userId, 
 											@RequestParam("article_id") String articleId,
 											@RequestParam("leave_id") String leaveId, 
@@ -53,19 +54,20 @@ public class CommentController {
 		// user_id 发送者id
 		// article_id 文章id
 		// leave_id 
-		// pid 
-		// pid 是什么？
-		// ...
-		//arciArticleCommentService.addArticleComment(new ArticleComment(id, articleId, floor, replyfloor, content, username, posttime));
+		// 获取当前时间
 		
-		//return new ResponseWrapper<>(null);
-		return null;
+		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
+				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, Integer.valueOf(pId), content, new Timestamp(System.currentTimeMillis()));
+		
+		arciArticleCommentService.addArticleComment(articleComment);
+		
+		return new ResponseWrapper<>(articleComment);
 	}
 	
 	// 添加其他评论
 	@CrossOrigin
 	@GetMapping("comment/setOuthComment")
-	public ResponseWrapper setOtherComment(@RequestParam("content") String content,
+	public ResponseWrapper<ArticleComment> setOtherComment(@RequestParam("content") String content,
 										   @RequestParam("user_id") String userId, 
 										   @RequestParam("article_id") String articleId,
 										   @RequestParam("leave_id") String leaveId, 
@@ -73,7 +75,13 @@ public class CommentController {
 										   @RequestParam("pid") String pId){
 		// ...
 		
-		return null;
+		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
+				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, 0, content, new Timestamp(System.currentTimeMillis()));
+		
+		arciArticleCommentService.addArticleComment(articleComment);
+
+		
+		return new ResponseWrapper<>(articleComment);
 	}
 	
 }

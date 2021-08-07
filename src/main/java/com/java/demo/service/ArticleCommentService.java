@@ -14,11 +14,17 @@ public interface ArticleCommentService {
 	// 获得当前文章下的评论
 	Collection<ArticleComment> getAllArticleComments(int articleId);
 	
+	// 获取单个评论
+	ArticleComment getArticleCommentById(Integer commentId);
+	
 	// 删除评论
 	void deleteArticleCommentById(int articleId);
 	
-	// 回复评论
-	void replyArticleCommentById(User user, int replyId,String content,int articleID);
+	// 获取当前的最大id
+	Integer getMaxCommentId();
 	
-	public void replyArticleCommentById(Integer artId,Integer userId, Integer replyId,String content,Timestamp posttime);
+//	// 回复评论
+//	void replyArticleCommentById(User user, int replyId,String content,int articleID);
+//	
+//	public void replyArticleCommentById(Integer artId,Integer userId, Integer replyId,String content,Timestamp posttime);
 }

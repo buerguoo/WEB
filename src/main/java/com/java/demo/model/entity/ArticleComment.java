@@ -27,9 +27,16 @@ public class ArticleComment {
 	@TableField("userId")
 	private Integer userId;	
 	
-	// 回复id
-	@TableField("replyId")
-	private Integer replyId;
+	// 回复评论的当前的commentId
+	@TableField("leaveId")
+	private Integer leaveId;
+	
+	// 赞赏等其他模块的分类id
+	@TableField("leavePid")
+	private Integer leavePid;
+	
+	// 回复评论的一级commentId
+	private Integer pid;
 	
 	// 内容
 	private String content;

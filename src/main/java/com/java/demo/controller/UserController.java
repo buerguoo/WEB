@@ -3,7 +3,6 @@ package com.java.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +25,13 @@ public class UserController {
 		
 		User user = null;
 		
-		System.out.println(userId);
+		//System.out.println(userId);
 		
 		if(!userId.equals("undefined") && !userId.equals("") && userId != null) {
 						
 			user = userService.getUserById(Integer.valueOf(userId));
 			
-			System.out.println(user);
+			//System.out.println(user);
 			
 		}
 		return new ResponseWrapper<>(user);
@@ -46,19 +45,11 @@ public class UserController {
 												@RequestParam("email") String email,
 												@RequestParam("sex") String sex,
 												@RequestParam("label") String label){
-		System.out.println(email);
-		System.out.println("\n\n\n"+username+avatar+email+sex+label+"\n\n\n");
-		User oldUser = userService.getUserByEmail(email);
+
 		
-		System.out.println(oldUser);
-		
+		User oldUser = userService.getUserByEmail(email);		
 		User newUser = new User(oldUser.getUserId(), username, oldUser.getPassword(), email, avatar, label, Integer.valueOf(sex));
-		
-		
-		System.out.println("new User: "+newUser);
 		userService.upateUser(newUser);
-		
-		
 		
 		return new ResponseWrapper<>(newUser);
 	}
