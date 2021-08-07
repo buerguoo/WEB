@@ -25,13 +25,13 @@ public class UserController {
 		
 		User user = null;
 		
-		//System.out.println(userId);
+		System.out.println(userId);
 		
 		if(!userId.equals("undefined") && !userId.equals("") && userId != null) {
 						
 			user = userService.getUserById(Integer.valueOf(userId));
 			
-			//System.out.println(user);
+			System.out.println(user);
 			
 		}
 		return new ResponseWrapper<>(user);

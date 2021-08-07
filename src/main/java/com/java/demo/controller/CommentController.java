@@ -56,7 +56,9 @@ public class CommentController {
 		// leave_id 
 		// 获取当前时间
 		
-		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
+		int maxCommentId = arciArticleCommentService.getMaxCommentId();
+		
+		ArticleComment articleComment = new ArticleComment(++maxCommentId , 
 				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, Integer.valueOf(pId), content, new Timestamp(System.currentTimeMillis()));
 		
 		arciArticleCommentService.addArticleComment(articleComment);
@@ -74,8 +76,9 @@ public class CommentController {
 										   @RequestParam("leave_pid") String leavePid,
 										   @RequestParam("pid") String pId){
 		// ...
+		int maxCommentId = arciArticleCommentService.getMaxCommentId();
 		
-		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
+		ArticleComment articleComment = new ArticleComment( ++maxCommentId, 
 				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, 0, content, new Timestamp(System.currentTimeMillis()));
 		
 		arciArticleCommentService.addArticleComment(articleComment);

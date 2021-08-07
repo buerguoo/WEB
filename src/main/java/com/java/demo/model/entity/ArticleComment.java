@@ -3,6 +3,7 @@ package com.java.demo.model.entity;
 import java.sql.Timestamp;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class ArticleComment {
 
 	// ID
+	@TableId
 	@TableField("commentId")
 	private Integer commentId;
 	

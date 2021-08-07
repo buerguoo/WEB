@@ -17,7 +17,7 @@ public class AboutMeController {
 	
 	
 	@CrossOrigin
-	@RequestMapping("/outh/AboutMeData")
+	//@RequestMapping("/outh/AboutMeData")
 	//查询关于我
 	public ResponseWrapper<User> ShowAboutMe(@PathParam("AboutMeData") User user)
 	{
