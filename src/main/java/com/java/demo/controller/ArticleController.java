@@ -61,8 +61,8 @@ public class ArticleController {
 		Collections.sort(as,new Comparator<Article>() {
 			public int compare(Article a1,Article a2)
 			{
-				int n1 = articleService.getCommentCount(a1.getArtId());
-				int n2 = articleService.getCommentCount(a2.getArtId());
+				int n1 = articleService.getCommentCount(a1.getArticleId());
+				int n2 = articleService.getCommentCount(a2.getArticleId());
 				if(n1>n2)
 					return 1;
 				else if(n1==n2)
