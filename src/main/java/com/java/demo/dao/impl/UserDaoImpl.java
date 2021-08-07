@@ -52,11 +52,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User getUserByName(String username) {
+	public User getUserByEmail(String email) {
 
 		// 只有在用户唯一的时候才能用
 		QueryWrapper<User> querywrapper = Wrappers.query();
-		querywrapper.like("username", username);
+		querywrapper.like("email", email);
 		
 		return userMapper.selectOne(querywrapper);
 	}
