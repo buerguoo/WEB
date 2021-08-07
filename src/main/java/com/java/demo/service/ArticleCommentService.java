@@ -3,6 +3,7 @@ package com.java.demo.service;
 import java.util.Collection;
 
 import com.java.demo.model.entity.ArticleComment;
+import com.java.demo.model.entity.User;
 
 public interface ArticleCommentService {
 	
@@ -16,6 +17,6 @@ public interface ArticleCommentService {
 	void deleteArticleCommentById(int articleId);
 	
 	// 回复评论
-	void replyArticleCommentById(String username, int replyfloor,String content,int articleID);
+	void replyArticleCommentById(User user, int replyId,String content,int articleID);
 	
 }

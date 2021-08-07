@@ -4,10 +4,12 @@
 package com.java.demo.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.java.demo.dao.ArticleDao;
 import com.java.demo.mapper.ArticleMapper;
 import com.java.demo.model.entity.Article;
@@ -50,6 +52,14 @@ public class ArticleDaoImpl implements ArticleDao {
 		
 		articleMapper.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Article> search(String label) {
+		// TODO Auto-generated method stub
+		QueryWrapper<Article> qw = new QueryWrapper<Article>();
+		qw.eq("label", label);
+		return articleMapper.selectList(qw);
 	}
 
 }

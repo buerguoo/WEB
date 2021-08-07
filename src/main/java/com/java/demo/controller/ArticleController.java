@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.demo.model.entity.Article;
 import com.java.demo.model.utils.ResponseStatus;
@@ -59,8 +60,8 @@ public class ArticleController {
 		Collections.sort(as,new Comparator<Article>() {
 			public int compare(Article a1,Article a2)
 			{
-				int n1 = articleService.getCommentCount(a1.getId());
-				int n2 = articleService.getCommentCount(a2.getId());
+				int n1 = articleService.getCommentCount(a1.getArtId());
+				int n2 = articleService.getCommentCount(a2.getArtId());
 				if(n1>n2)
 					return 1;
 				else if(n1==n2)
@@ -74,5 +75,13 @@ public class ArticleController {
 			return new ResponseWrapper<List<Article>>(as);
 		else 
 			return new ResponseWrapper<List<Article>>(as.subList(0, number));
+	}
+	
+	@CrossOrigin
+	@RequestMapping("/article/ArtClassData")
+	public ResponseWrapper<Collection<Article>> ShowArtClassSearch(@RequestParam("classList") String label )
+	{
+		Collection<Article> as = articleService.getArticlesByLabel(label);
+		return new ResponseWrapper<Collection<Article>>(as);
 	}
 }
