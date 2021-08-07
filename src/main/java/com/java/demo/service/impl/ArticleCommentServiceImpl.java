@@ -1,6 +1,5 @@
 package com.java.demo.service.impl;
 
-import java.sql.Timestamp;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.java.demo.dao.ArticleCommentDao;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleCommentService;
-import com.java.demo.model.entity.*;
 
 @Service("ArticleComment")
 public class ArticleCommentServiceImpl implements ArticleCommentService {

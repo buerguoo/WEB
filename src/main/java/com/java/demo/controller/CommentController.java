@@ -76,7 +76,7 @@ public class CommentController {
 		// ...
 		
 		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
-				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), Integer.valueOf(leavePid), Integer.valueOf(pId), content, new Timestamp(System.currentTimeMillis()));
+				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, 0, content, new Timestamp(System.currentTimeMillis()));
 		
 		arciArticleCommentService.addArticleComment(articleComment);
 
