@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.java.demo.dao.ArticleCommentDao;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleCommentService;
+import java.util.List;
 
 @Service("ArticleComment")
 public class ArticleCommentServiceImpl implements ArticleCommentService {
@@ -99,5 +100,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 		return articlecommentdao.search(commentId);
 	}
 
-
+	@Override
+	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveId){
+		return articlecommentdao.getAllArticleCommentsByType(leaveId);
+	}
 }

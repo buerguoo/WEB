@@ -16,8 +16,7 @@ public class Article {
 	
 	// id
 	@TableId
-	@TableField("artId")
-	private Integer artId;
+	private Integer articleId;
 	
 	// 标题
 	@TableField("articleName")
