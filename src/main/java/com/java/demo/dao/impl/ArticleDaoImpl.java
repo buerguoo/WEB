@@ -36,7 +36,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	}
 
 	@Override
-	public Article search(int id) {
+	public Article search(Integer id) {
 		
 		return articleMapper.selectById(id);
 	}
@@ -48,7 +48,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 		
 		articleMapper.deleteById(id);
 		

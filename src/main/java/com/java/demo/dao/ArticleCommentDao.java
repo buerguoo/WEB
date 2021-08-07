@@ -11,11 +11,12 @@ import com.java.demo.model.entity.ArticleComment;
 @Component
 public interface ArticleCommentDao extends Basedao<ArticleComment>{
 	
-	public List<ArticleComment> getAllArticleComments(int articleid);
+	public List<ArticleComment> getAllArticleComments(Integer articleid);
 	
 	// 获取当前最大的commitId
 	public Integer getMaxCommentId();
 	
 	// 根据leaveid获取列表
 	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveid);
+	
 }

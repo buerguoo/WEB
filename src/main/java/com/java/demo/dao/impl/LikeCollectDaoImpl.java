@@ -25,12 +25,12 @@ public class LikeCollectDaoImpl implements LikeCollectDao {
 	}
 
 	@Override
-	public LikeCollect search(int id) {
+	public LikeCollect search(Integer id) {
 		// TODO Auto-generated method stub
 		return lcmapper.selectById(id);
 	}
 	@Override
-	public List<LikeCollect> searchLikeCollectlist(int id)
+	public List<LikeCollect> searchLikeCollectlist(Integer id)
 	{
 		QueryWrapper<LikeCollect> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("Id", id);
@@ -38,7 +38,7 @@ public class LikeCollectDaoImpl implements LikeCollectDao {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 		// TODO Auto-generated method stub
 		lcmapper.deleteById(id);
 	}

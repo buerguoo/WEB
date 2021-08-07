@@ -14,13 +14,13 @@ public interface AlbumService {
 	List<Album> getAllAlbum();
 	
 	// 获取某个相册
-	Album getAlbumById(int albumId);
+	Album getAlbumById(Integer albumId);
 	
 	// 删除相册
-	void deleteAlumById(int albumId);
+	void deleteAlumById(Integer albumId);
 	
 	// 更新相册名字
-	Album updateAlumNameById(int albumId, String newName);
+	Album updateAlumNameById(Integer albumId, String newName);
 	
 	
 }

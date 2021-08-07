@@ -21,19 +21,19 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public Photo getPhotoById(int photoId) {
+	public Photo getPhotoById(Integer photoId) {
 		// TODO Auto-generated method stub
 		return photoDao.search(photoId);
 	}
 
 	@Override
-	public List<Photo> getPhotos(int albumId) {
+	public List<Photo> getPhotos(Integer albumId) {
 		// TODO Auto-generated method stub
 		return photoDao.getAll();
 	}
 
 	@Override
-	public void deltePhoto(int photoId, int albumId) {
+	public void deltePhoto(Integer photoId, Integer albumId) {
 		// TODO Auto-generated method stub
 		photoDao.delete(photoId);
 	}

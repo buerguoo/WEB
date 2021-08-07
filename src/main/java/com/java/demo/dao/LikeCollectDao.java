@@ -6,6 +6,6 @@ import com.java.demo.model.entity.LikeCollect;
 
 public interface LikeCollectDao extends Basedao<LikeCollect>  {
 
-	List<LikeCollect> searchLikeCollectlist(int id);
+	List<LikeCollect> searchLikeCollectlist(Integer id);
 	
 }

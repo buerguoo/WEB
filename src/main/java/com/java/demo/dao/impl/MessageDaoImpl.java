@@ -24,13 +24,13 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public Message search(int id) {
+	public Message search(Integer id) {
 
 		return messageMapper.selectById(id);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 
 		messageMapper.deleteById(id);
 

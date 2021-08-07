@@ -13,16 +13,16 @@ public interface ArticleService {
 	List<Article> getAllArticles();
 	
 	// 获取某个单个的文章
-	Article getArticleById(int articleId);
+	Article getArticleById(Integer articleId);
 	
 	// 文章删除
-	void deleteArticleById(int articleId);
+	void deleteArticleById(Integer articleId);
 	
 	// 文章更新
 	boolean updateArticleById(Article article);
 	
 	// 评论次数增加
-	int getCommentCount(int articleId);
+	int getCommentCount(Integer articleId);
 
 	List<Article> getArticlesByLabel(String label);
 	

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserById(int userId) {
+	public User getUserById(Integer userId) {
 		// TODO Auto-generated method stub
 		return userdao.search(userId);
 	}

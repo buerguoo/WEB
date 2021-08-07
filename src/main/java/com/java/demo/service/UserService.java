@@ -8,7 +8,7 @@ public interface UserService {
 	User getUserByEmail(String email);
 	
 	// 使用 id 获取用户
-	User getUserById(int userId);
+	User getUserById(Integer userId);
 	
 	// 更新用户信息
 	User upateUser(User user);

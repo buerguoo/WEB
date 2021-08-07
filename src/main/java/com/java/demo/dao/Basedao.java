@@ -6,9 +6,9 @@ public interface Basedao<T> {
 	
 	void insert(T entity);
 	
-	T search(int id);
+	T search(Integer id);
 	
-	void delete(int id);	
+	void delete(Integer id);	
 	
 	void update(T entity);
 	

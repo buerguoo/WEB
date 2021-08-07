@@ -32,13 +32,13 @@ public  class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Article getArticleById(int articleId) {
+	public Article getArticleById(Integer articleId) {
 		// TODO Auto-generated method stub
 		return articledao.search(articleId);
 	}
 
 	@Override
-	public void deleteArticleById(int articleId) {
+	public void deleteArticleById(Integer articleId) {
 		// TODO Auto-generated method stub
 		articledao.delete(articleId);
 	}
@@ -51,7 +51,7 @@ public  class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public int getCommentCount(int articleId) {
+	public int getCommentCount(Integer articleId) {
 		// TODO Auto-generated method stub
 		ArticleCommentDao acd = new ArticleCommentDaoImpl();
 		List<ArticleComment> comments = acd.getAllArticleComments(articleId);

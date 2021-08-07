@@ -24,13 +24,13 @@ public class PhotoDaoImpl implements PhotoDao {
 	}
 
 	@Override
-	public Photo search(int id) {
+	public Photo search(Integer id) {
 
 		return photoMapper.selectById(id);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 
 		photoMapper.deleteById(id);
 

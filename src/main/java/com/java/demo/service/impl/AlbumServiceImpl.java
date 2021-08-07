@@ -28,20 +28,20 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 
 	@Override
-	public Album getAlbumById(int albumId) {
+	public Album getAlbumById(Integer albumId) {
 		// TODO Auto-generated method stub
 		return albumdao.search(albumId);
 		
 	}
 
 	@Override
-	public void deleteAlumById(int albumId) {
+	public void deleteAlumById(Integer albumId) {
 		// TODO Auto-generated method stub
 		albumdao.delete(albumId);
 	}
 
 	@Override
-	public Album updateAlumNameById(int albumId, String newName) {
+	public Album updateAlumNameById(Integer albumId, String newName) {
 		// TODO Auto-generated method stub
 		Album album = albumdao.search(albumId);
 		album.setName(newName);

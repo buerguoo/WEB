@@ -25,14 +25,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User search(int id) {
+	public User search(Integer id) {
 		
 		return userMapper.selectById(id);
 		
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 
 		userMapper.deleteById(id);
 

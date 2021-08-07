@@ -22,7 +22,7 @@ public class AboutMeController {
 	@CrossOrigin
 	//@RequestMapping("/outh/AboutMeData")
 	//查询关于我
-	public ResponseWrapper<User> ShowAboutMe(@PathParam("user_id") int id)
+	public ResponseWrapper<User> ShowAboutMe(@PathParam("user_id") Integer id)
 	{
 		User user = userService.getUserById(id);
 		return new ResponseWrapper<User>(user);
@@ -31,8 +31,8 @@ public class AboutMeController {
 	//查询喜欢列表
 	@CrossOrigin
 	@RequestMapping({"/article/getLikeList","article/getCollectList"})
-	public ResponseWrapper<List<Article>> ShowLikeCollect(@PathParam("user_id") int userId,
-															@PathParam("art_id") int artId,
+	public ResponseWrapper<List<Article>> ShowLikeCollect(@PathParam("user_id") Integer userId,
+															@PathParam("art_id") Integer artId,
 															@PathParam("article_name") String name)
 	{
 		return null;

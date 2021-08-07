@@ -12,13 +12,13 @@ public interface ArticleCommentService {
 	void addArticleComment(ArticleComment articleComment);
 	
 	// 获得当前文章下的评论
-	List<ArticleComment> getAllArticleComments(int articleId);
+	List<ArticleComment> getAllArticleComments(Integer articleId);
 	
 	// 获取单个评论
 	ArticleComment getArticleCommentById(Integer commentId);
 	
 	// 删除评论
-	void deleteArticleCommentById(int articleId);
+	void deleteArticleCommentById(Integer articleId);
 	
 	// 获取当前的最大id
 	Integer getMaxCommentId();
@@ -26,6 +26,8 @@ public interface ArticleCommentService {
 	// 获取当前类型所有评论
 	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveId);
 	
+	// 获取当前文章的最后一条评论
+	public ArticleComment getLastArticleComment(Integer articleId);
 //	// 回复评论
 //	void replyArticleCommentById(User user, int replyId,String content,int articleID);
 //	

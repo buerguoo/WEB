@@ -1,6 +1,5 @@
 package com.java.demo.service.impl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,25 +11,25 @@ import java.util.List;
 @Service("ArticleComment")
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
-	//创建数据库操作对象
+	// 创建数据库操作对象
 	@Autowired
 	private ArticleCommentDao articlecommentdao;
-	
+
 	@Override
 	public void addArticleComment(ArticleComment articleComment) {
 		// TODO Auto-generated method stub
 		articlecommentdao.insert(articleComment);
-		
+
 	}
 
 	@Override
-	public List<ArticleComment> getAllArticleComments(int articleId) {
+	public List<ArticleComment> getAllArticleComments(Integer articleId) {
 		// TODO Auto-generated method stub
-		return articlecommentdao.getAll();
+		return articlecommentdao.getAllArticleComments(articleId);
 	}
 
 	@Override
-	public void deleteArticleCommentById(int articleId) {
+	public void deleteArticleCommentById(Integer articleId) {
 		// TODO Auto-generated method stub
 		articlecommentdao.delete(articleId);
 	}
@@ -100,7 +99,20 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 	}
 
 	@Override
-	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveId){
+	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveId) {
 		return articlecommentdao.getAllArticleCommentsByType(leaveId);
+	}
+
+	@Override
+	public ArticleComment getLastArticleComment(Integer articleId) {
+
+		List<ArticleComment> articleComments = articlecommentdao.getAllArticleComments(articleId);
+		Integer max = -1;
+		for (ArticleComment articleComment : articleComments) {
+			if (articleComment.getCommentId() > max) {
+				max = articleComment.getCommentId();
+			}
+		}
+		return articlecommentdao.search(max);
 	}
 }

@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LikeCollect {
 	//用户Id
-	private int userId;
+	private Integer userId;
 	//文章id
-	private int artId;
+	private Integer artId;
 	//类型，01表示喜欢，10表示收藏，11喜欢+收藏，00啥也不是
-	private int type;
+	private Integer type;
 }

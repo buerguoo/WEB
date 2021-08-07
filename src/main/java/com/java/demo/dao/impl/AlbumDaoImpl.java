@@ -24,13 +24,13 @@ public class AlbumDaoImpl implements AlbumDao {
 	}
 
 	@Override
-	public Album search(int id) {
+	public Album search(Integer id) {
 		// 根据id进行查找
 		return albumMapper.selectById(id);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 
 		// 根据id进行删除
 		albumMapper.deleteById(id);

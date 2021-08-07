@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Git;
 import org.springframework.stereotype.Controller;
@@ -16,85 +17,146 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.java.demo.model.entity.Article;
+import com.java.demo.model.entity.ArticleComment;
+import com.java.demo.model.entity.User;
+import com.java.demo.model.response.ArticleResponse;
+import com.java.demo.model.response.ArticleRightResponse;
 import com.java.demo.model.utils.ResponseStatus;
 import com.java.demo.model.utils.ResponseWrapper;
+import com.java.demo.service.ArticleCommentService;
 import com.java.demo.service.ArticleService;
+import com.java.demo.service.UserService;
 
-@Controller
+@RestController
 public class ArticleController {
 	@Autowired
 	ArticleService articleService;
-	//获取所有文章信息
+	@Autowired
+	ArticleCommentService articleCommentService;
+	@Autowired
+	UserService userService;
+
+	// 获取所有文章信息
 	@CrossOrigin
-	@RequestMapping({"/article/ShowArticleAll","/nav/ActiveClassAllData"})
-	public ResponseWrapper<Article> ShowArticle(@PathParam("art_id") String artId)
-	{
-		int n = 0;
-		if(artId!=null)
-			n = Integer.valueOf(artId);
-		Article article = articleService.getArticleById(n);
-		if(article!=null)
-			return new ResponseWrapper<Article>(article);
-		else {
-			return new ResponseWrapper<Article>(ResponseStatus.FAIL_4000 ,article);
+	@RequestMapping("/article/ShowArticleAll")
+	public ResponseWrapper<List<ArticleResponse>> ShowArticle(@RequestParam("art_id") Integer artId,
+			@RequestParam("cate_id") Integer cateId, @RequestParam("article_name") String articleName) {
+		List<Article> articles = articleService.getAllArticles();
+		List<ArticleResponse> articleResponses = new ArrayList<>();
+		Integer tempId = artId;
+		for (Article article : articles) {
+			ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
+					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
+					article.getContent());
+			articleResponses.add(articleResponse);
 		}
-	}	
-	
-	//根据id获取文章信息
+		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
+	}
+
+	// 根据id获取文章信息
 	@CrossOrigin
-	@RequestMapping({"/article/getArticleInfo","/DetailShare","/Share"})
-	public ResponseWrapper<Article> ShowArticleInfo(@PathVariable("artId") String artId)
-	{
+	@RequestMapping("/article/getArticleInfo")
+	public ResponseWrapper<ArticleResponse> ShowArticleInfo(@RequestParam("art_id") Integer artId,
+			@RequestParam("user_id") Integer userId) {
+
 		Article article = articleService.getArticleById(Integer.valueOf(artId));
-		
-		ResponseWrapper<Article> responseWrapper = null;
-		if(article == null)
-			responseWrapper = new ResponseWrapper<Article>(ResponseStatus.FAIL_4000,article);
+		ArticleResponse articleResponse = null;
+		ResponseWrapper<ArticleResponse> responseWrapper = null;
+		if (article == null)
+			responseWrapper = new ResponseWrapper<ArticleResponse>(ResponseStatus.FAIL_4000, articleResponse);
 		else {
-			responseWrapper = new ResponseWrapper<Article>(article);
+			articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
+					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
+					article.getContent());
+			responseWrapper = new ResponseWrapper<ArticleResponse>(articleResponse);
 		}
 		return responseWrapper;
 	}
-	
-	//获取前number个评论最多的文章
+
+	// 获取前number个评论最多的文章?????WTF为什么是个变量
 	@CrossOrigin
 	@RequestMapping("article/ShowArtCommentCount")
-	public ResponseWrapper<List<Article>> ShowMostPopularArticle(int number)
-	{
+	public ResponseWrapper<List<ArticleRightResponse>> ShowMostPopularArticle() {
 		Collection<Article> articles = articleService.getAllArticles();
 		List<Article> as = new ArrayList<Article>();
-		for(Article a:articles)
+		for (Article a : articles)
 			as.add(a);
-		Collections.sort(as,new Comparator<Article>() {
-			public int compare(Article a1,Article a2)
-			{
-				int n1 = articleService.getCommentCount(a1.getArticleId());
-				int n2 = articleService.getCommentCount(a2.getArticleId());
-				if(n1>n2)
+		Collections.sort(as, new Comparator<Article>() {// 重写排序函数！！！
+			public int compare(Article a1, Article a2) {
+				int n1 = a1.getCommentCount();
+				int n2 = a2.getCommentCount();
+				if (n1 > n2)
 					return 1;
-				else if(n1==n2)
+				else if (n1 == n2)
 					return 0;
 				else {
 					return -1;
 				}
 			}
 		});
-		if(as.size()<number)
-			return new ResponseWrapper<List<Article>>(as);
-		else 
-			return new ResponseWrapper<List<Article>>(as.subList(0, number));
+		List<ArticleRightResponse> articleRightResponses = new ArrayList<>();
+		for (Article article : as) {
+			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
+			User user = userService.getUserById(articleComment.getUserId());
+			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
+					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent());
+			articleRightResponses.add(articleRightResponse);
+		}
+		if (articleRightResponses.size() < 10)
+			return new ResponseWrapper<List<ArticleRightResponse>>(articleRightResponses);
+		else
+			return new ResponseWrapper<List<ArticleRightResponse>>(articleRightResponses.subList(0, 10));
 	}
-	
-//	@CrossOrigin
-//	@RequestMapping({"/article/ArtClassData"})
-//	public ResponseWrapper<Collection<Article>> ShowArtClassSearch()
-//	{
-//		Collection<Article> as = articleService.getAllArticles();
-//		return new ResponseWrapper<Collection<Article>>(as);
-////		System.out.println(id);
-////		return null;
-//	}
-	
+
+	@CrossOrigin
+	@RequestMapping("article/ShowBrowseCount")
+	public ResponseWrapper<List<ArticleRightResponse>> ShowMostViewedArticle() {
+		Collection<Article> articles = articleService.getAllArticles();
+		List<Article> as = new ArrayList<Article>();
+		for (Article a : articles)
+			as.add(a);
+		Collections.sort(as, new Comparator<Article>() {// 重写排序函数！！！
+			public int compare(Article a1, Article a2) {
+				int n1 = a1.getViewCount();
+				int n2 = a2.getViewCount();
+				if (n1 > n2)
+					return 1;
+				else if (n1 == n2)
+					return 0;
+				else {
+					return -1;
+				}
+			}
+		});
+		List<ArticleRightResponse> articleRightResponses = new ArrayList<>();
+		for (Article article : as) {
+			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
+			User user = userService.getUserById(articleComment.getUserId());
+			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
+					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent());
+			articleRightResponses.add(articleRightResponse);
+		}
+		if (articleRightResponses.size() < 10)
+			return new ResponseWrapper<List<ArticleRightResponse>>(articleRightResponses);
+		else
+			return new ResponseWrapper<List<ArticleRightResponse>>(articleRightResponses.subList(0, 10));
+	}
+
+	@CrossOrigin
+	@RequestMapping({ "/article/ArtClassData" })
+	public ResponseWrapper<List<ArticleResponse>> ShowArtClassSearch() {
+		List<Article> as = articleService.getAllArticles();
+		List<ArticleResponse> articleResponses = new ArrayList<>();
+		for (Article article : as) {
+			ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
+					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
+					article.getContent());
+			articleResponses.add(articleResponse);
+		}
+		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
+	}
+
 }

@@ -10,11 +10,11 @@ public interface PhotoService {
 	void addPhoto(Photo photo);
 	
 	// 获取图片
-	Photo getPhotoById(int photoId);
+	Photo getPhotoById(Integer photoId);
 	
 	// 获取全部图片
-	List<Photo> getPhotos(int albumId);
+	List<Photo> getPhotos(Integer albumId);
 	
 	// 从相册删除图片
-	void deltePhoto(int photoId, int albumId);	
+	void deltePhoto(Integer photoId, Integer albumId);	
 }

@@ -12,14 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ArticleCommentResponse {
 	
+	private Integer commentId;
 	private String content;
-	
 	private String username;
-	
 	private String 	label;
-	
 	private Timestamp time;
-	
 	private String avatar;
 	
 }

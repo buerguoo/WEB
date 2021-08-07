@@ -17,21 +17,21 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 
 	@Autowired
 	private ArticleCommentMapper articleCommentMapper;
-	
+
 	@Override
 	public void insert(ArticleComment entity) {
-		
+
 		articleCommentMapper.insert(entity);
 
 	}
 
 	@Override
-	public ArticleComment search(int id) {
+	public ArticleComment search(Integer id) {
 		return articleCommentMapper.selectById(id);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 
 		// 根据id进行删除
 		articleCommentMapper.deleteById(id);
@@ -39,24 +39,24 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 
 	@Override
 	public void update(ArticleComment entity) {
-		
+
 		// 更新
 		articleCommentMapper.updateById(entity);
 	}
 
 	@Override
 	public List<ArticleComment> getAll() {
-		
+
 		return articleCommentMapper.selectList(null);
 	}
 
 	@Override
-	public List<ArticleComment> getAllArticleComments(int articleid){
-		
+	public List<ArticleComment> getAllArticleComments(Integer articleid) {
+
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
-		queryWrapper.like("artid",articleid);
+		queryWrapper.like("artid", articleid);
 		return articleCommentMapper.selectList(queryWrapper);
-		
+
 	}
 
 	@Override
@@ -64,13 +64,14 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
 		queryWrapper.select("MAX(`comment_id`) as max");
-		return (Integer)articleCommentMapper.selectObjs(queryWrapper).get(0);
+		return (Integer) articleCommentMapper.selectObjs(queryWrapper).get(0);
 	}
 
 	@Override
-	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveid){
+	public List<ArticleComment> getAllArticleCommentsByType(Integer leaveid) {
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
-		queryWrapper.like("leaveid",leaveid);
+		queryWrapper.like("leaveid", leaveid);
 		return articleCommentMapper.selectList(queryWrapper);
 	}
+
 }

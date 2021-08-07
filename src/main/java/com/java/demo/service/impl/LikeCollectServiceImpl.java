@@ -19,7 +19,7 @@ public class LikeCollectServiceImpl implements LikeCollectService{
 	@Autowired
 	private ArticleDao articledao;
 	@Override
-	public List<Article> getLikeCollectByUser(int id)
+	public List<Article> getLikeCollectByUser(Integer id)
 	{
 		List<LikeCollect> likeCollects =  likeCollectDao.searchLikeCollectlist(id);
 		List<Article> articles = new ArrayList<>();
