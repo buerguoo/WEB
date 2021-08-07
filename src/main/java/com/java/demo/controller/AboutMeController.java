@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,16 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.java.demo.model.entity.Article;
 import com.java.demo.model.entity.User;
 import com.java.demo.model.utils.ResponseWrapper;
+import com.java.demo.service.UserService;
 
 @Controller
 public class AboutMeController {
 	
-	
+	@Autowired
+	UserService userService;
 	@CrossOrigin
 	//@RequestMapping("/outh/AboutMeData")
 	//查询关于我
-	public ResponseWrapper<User> ShowAboutMe(@PathParam("AboutMeData") User user)
+	public ResponseWrapper<User> ShowAboutMe(@PathParam("user_id") int id)
 	{
+		User user = userService.getUserById(id);
 		return new ResponseWrapper<User>(user);
 	}
 	
