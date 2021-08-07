@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Git;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,9 +80,11 @@ public class ArticleController {
 	
 	@CrossOrigin
 	@RequestMapping("/article/ArtClassData")
-	public ResponseWrapper<Collection<Article>> ShowArtClassSearch(@RequestParam("classList") String label )
+	public ResponseWrapper<Collection<Article>> ShowArtClassSearch(@RequestParam(value="label",required = false) String label )
 	{
 		Collection<Article> as = articleService.getArticlesByLabel(label);
 		return new ResponseWrapper<Collection<Article>>(as);
+//		System.out.println(id);
+//		return null;
 	}
 }
