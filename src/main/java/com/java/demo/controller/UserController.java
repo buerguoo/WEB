@@ -48,7 +48,7 @@ public class UserController {
 												@RequestParam("label") String label){
 		System.out.println(email);
 		
-		User oldUser = userService.getUserByUsername(email);
+		User oldUser = userService.getUserByEmail(email);
 		
 		System.out.println(oldUser);
 		
