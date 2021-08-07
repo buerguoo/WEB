@@ -1,11 +1,17 @@
 package com.java.demo.controller;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.java.demo.model.entity.User;
 
@@ -25,13 +31,13 @@ public class UserController {
 		
 		User user = null;
 		
-		System.out.println(userId);
+		//System.out.println(userId);
 		
 		if(!userId.equals("undefined") && !userId.equals("") && userId != null) {
 						
 			user = userService.getUserById(Integer.valueOf(userId));
 			
-			System.out.println(user);
+			//System.out.println(user);
 			
 		}
 		return new ResponseWrapper<>(user);
@@ -52,6 +58,20 @@ public class UserController {
 		userService.upateUser(newUser);
 		
 		return new ResponseWrapper<>(newUser);
+	}
+	
+	// 上传照片
+	@CrossOrigin
+	@PostMapping("/Userinfo/UploadImg")
+	public void uploadImg(HttpRequest request) {
+		
+	 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;  
+
+		MultipartFile img = multipartRequest.getFile("file");
+				
+		System.out.println(img.getSize());		
+		
+		//return ResponseWrapper<>(null);
 	}
 		
 }

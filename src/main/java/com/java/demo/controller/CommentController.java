@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.sound.midi.Soundbank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.demo.model.entity.ArticleComment;
+import com.java.demo.model.entity.User;
+import com.java.demo.model.response.ArticleCommentResponse;
 import com.java.demo.model.utils.ResponseWrapper;
 import com.java.demo.service.ArticleCommentService;
+import com.java.demo.service.UserService;
 
 @RestController
 public class CommentController {
@@ -22,27 +27,64 @@ public class CommentController {
 	@Autowired
 	ArticleCommentService arciArticleCommentService;
 	
+	@Autowired
+	UserService userService;
+	
 	// 查询文章评论数据
 	@CrossOrigin
 	@GetMapping("/comment/ArticleComment")
-	public ResponseWrapper<Collection<ArticleComment>> ArticleComment(@RequestParam("art_id") String articleId,
+	public ResponseWrapper<List<ArticleCommentResponse>> ArticleComment(@RequestParam("art_id") String articleId,
 																@RequestParam("comment_id") String commentId) {
 		
 		// 获取文章评论, 需要增加业务
 		Collection<ArticleComment> articleComments = arciArticleCommentService.getAllArticleComments(Integer.valueOf(articleId));
 		
-		return new ResponseWrapper<Collection<ArticleComment>>(articleComments);
+		List<ArticleCommentResponse> articleCommentResponses = new LinkedList<ArticleCommentResponse>();
+		
+		for (ArticleComment articleComment : articleComments) {
+			
+			User user = userService.getUserById(articleComment.getUserId());
+			
+			ArticleCommentResponse articleCommentResponse = new ArticleCommentResponse();
+			articleCommentResponse.setAvatar(user.getAvatar());
+			articleCommentResponse.setContent(articleComment.getContent());
+			articleCommentResponse.setLabel(user.getLabel());
+			articleCommentResponse.setTime(articleComment.getPosttime());
+			//System.out.println(articleCommentResponse.getTime());
+			articleCommentResponse.setUsername(user.getUsername());
+			articleCommentResponses.add(articleCommentResponse);
+		}
+		
+		
+		return new ResponseWrapper<List<ArticleCommentResponse>>(articleCommentResponses);
 	}
 	
 	// 查询其他评论数据
 	@CrossOrigin
 	@GetMapping("/comment/OtherComment")
-	public ResponseWrapper<List<ArticleComment>> OtherComment(@RequestParam("leave_id") String leaveId, 
+	public ResponseWrapper<List<ArticleCommentResponse>> OtherComment(@RequestParam("leave_id") String leaveId, 
 														@RequestParam("comment_id") String commentId){
 		// 获取其他评论
 		List<ArticleComment> articleComments = arciArticleCommentService.getAllArticleCommentsByType(Integer.valueOf(leaveId));
 		
-		return new ResponseWrapper<List<ArticleComment>>(articleComments);
+		List<ArticleCommentResponse> articleCommentResponses = new LinkedList<ArticleCommentResponse>();
+		
+		for (ArticleComment articleComment : articleComments) {
+			
+			User user = userService.getUserById(articleComment.getUserId());
+			
+			ArticleCommentResponse articleCommentResponse = new ArticleCommentResponse();
+			articleCommentResponse.setAvatar(user.getAvatar());
+			articleCommentResponse.setContent(articleComment.getContent());
+			articleCommentResponse.setLabel(user.getLabel());
+			articleCommentResponse.setTime(articleComment.getPosttime());
+			//System.out.println(articleCommentResponse.getTime());
+			articleCommentResponse.setUsername(user.getUsername());
+			articleCommentResponses.add(articleCommentResponse);
+		}
+		
+		
+		return new ResponseWrapper<List<ArticleCommentResponse>>(articleCommentResponses);
 	}
 	
 	// 添加文章评论
