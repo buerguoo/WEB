@@ -1,6 +1,6 @@
 package com.java.demo.service;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.java.demo.model.entity.Photo;
 
@@ -13,7 +13,7 @@ public interface PhotoService {
 	Photo getPhotoById(int photoId);
 	
 	// 获取全部图片
-	Collection<Photo> getPhotos(int albumId);
+	List<Photo> getPhotos(int albumId);
 	
 	// 从相册删除图片
 	void deltePhoto(int photoId, int albumId);	

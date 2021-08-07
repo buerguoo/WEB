@@ -45,7 +45,7 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 	}
 
 	@Override
-	public Collection<ArticleComment> getAll() {
+	public List<ArticleComment> getAll() {
 		
 		return articleCommentMapper.selectList(null);
 	}

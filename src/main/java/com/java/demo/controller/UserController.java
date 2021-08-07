@@ -2,6 +2,8 @@ package com.java.demo.controller;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,19 +61,4 @@ public class UserController {
 		
 		return new ResponseWrapper<>(newUser);
 	}
-	
-	// 上传照片
-	@CrossOrigin
-	@PostMapping("/Userinfo/UploadImg")
-	public void uploadImg(HttpRequest request) {
-		
-	 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;  
-
-		MultipartFile img = multipartRequest.getFile("file");
-				
-		System.out.println(img.getSize());		
-		
-		//return ResponseWrapper<>(null);
-	}
-		
 }

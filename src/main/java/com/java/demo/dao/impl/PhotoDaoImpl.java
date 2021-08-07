@@ -1,6 +1,7 @@
 package com.java.demo.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,7 +43,7 @@ public class PhotoDaoImpl implements PhotoDao {
 	}
 
 	@Override
-	public Collection<Photo> getAll() {
+	public List<Photo> getAll() {
 		
 		return photoMapper.selectList(null);
 	}

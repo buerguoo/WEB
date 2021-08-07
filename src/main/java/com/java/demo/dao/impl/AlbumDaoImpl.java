@@ -1,6 +1,7 @@
 package com.java.demo.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,7 +44,7 @@ public class AlbumDaoImpl implements AlbumDao {
 	}
 
 	@Override
-	public Collection<Album> getAll() {
+	public List<Album> getAll() {
 		
 		// 返回所有的相册列表
 		return albumMapper.selectList(null);

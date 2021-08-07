@@ -1,6 +1,6 @@
 package com.java.demo.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface Basedao<T> {
 	
@@ -12,5 +12,5 @@ public interface Basedao<T> {
 	
 	void update(T entity);
 	
-	Collection<T> getAll();
+	List<T> getAll();
 }
