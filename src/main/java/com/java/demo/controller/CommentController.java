@@ -44,11 +44,16 @@ public class CommentController {
 	// 添加文章评论
 	@CrossOrigin
 	@GetMapping("/comment/setArticleComment")
-	public ResponseWrapper SetArticleCommet(@RequestParam("content") String content,
+	public ResponseWrapper setArticleCommet(@RequestParam("content") String content,
 											@RequestParam("user_id") String userId, 
 											@RequestParam("article_id") String articleId,
 											@RequestParam("leave_id") String leaveId, 
 											@RequestParam("pid") String pId) {
+		// content 内容
+		// user_id 发送者id
+		// article_id 文章id
+		// leave_id 
+		// pid 
 		// pid 是什么？
 		// ...
 		//arciArticleCommentService.addArticleComment(new ArticleComment(id, articleId, floor, replyfloor, content, username, posttime));
@@ -60,7 +65,7 @@ public class CommentController {
 	// 添加其他评论
 	@CrossOrigin
 	@GetMapping("comment/setOuthComment")
-	public ResponseWrapper SetOtherComment(@RequestParam("content") String content,
+	public ResponseWrapper setOtherComment(@RequestParam("content") String content,
 										   @RequestParam("user_id") String userId, 
 										   @RequestParam("article_id") String articleId,
 										   @RequestParam("leave_id") String leaveId, 
@@ -71,5 +76,4 @@ public class CommentController {
 		return null;
 	}
 	
-	// 
 }

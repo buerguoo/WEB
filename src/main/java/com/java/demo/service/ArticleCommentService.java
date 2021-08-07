@@ -1,5 +1,6 @@
 package com.java.demo.service;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import com.java.demo.model.entity.ArticleComment;
@@ -19,4 +20,5 @@ public interface ArticleCommentService {
 	// 回复评论
 	void replyArticleCommentById(User user, int replyId,String content,int articleID);
 	
+	public void replyArticleCommentById(Integer artId,Integer userId, Integer replyId,String content,Timestamp posttime);
 }

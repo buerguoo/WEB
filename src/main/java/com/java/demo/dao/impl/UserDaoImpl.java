@@ -25,8 +25,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User search(int id) {
-
-		return userMapper.selectById(id);
+		
+		QueryWrapper<User> querywrapper = Wrappers.query();
+		querywrapper.like("userId", id);	
+		
+		return userMapper.selectOne(querywrapper);
 	}
 
 	@Override
@@ -53,7 +56,7 @@ public class UserDaoImpl implements UserDao {
 
 		// 只有在用户唯一的时候才能用
 		QueryWrapper<User> querywrapper = Wrappers.query();
-		querywrapper.like("email", username);
+		querywrapper.like("username", username);
 		
 		return userMapper.selectOne(querywrapper);
 	}

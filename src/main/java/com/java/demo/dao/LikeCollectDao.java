@@ -1,5 +1,7 @@
 package com.java.demo.dao;
 
-public interface LikeCollectDao {
+import com.java.demo.model.entity.LikeCollect;
 
+public interface LikeCollectDao extends Basedao<LikeCollect>  {
+	
 }
