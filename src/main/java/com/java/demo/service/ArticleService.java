@@ -26,4 +26,6 @@ public interface ArticleService {
 
 	List<Article> getArticlesByLabel(String label);
 	
+	// 获取当前的最大id
+	Integer getMaxArticleId();
 }

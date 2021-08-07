@@ -14,11 +14,11 @@ import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.service.ArticleService;
 
 @Service("ArticleService")
-public  class ArticleServiceImpl implements ArticleService {
-	
+public class ArticleServiceImpl implements ArticleService {
+
 	@Autowired
 	private ArticleDao articledao;
-	
+
 	@Override
 	public void addArticle(Article article) {
 		// TODO Auto-generated method stub
@@ -62,6 +62,11 @@ public  class ArticleServiceImpl implements ArticleService {
 	public List<Article> getArticlesByLabel(String label) {
 		// TODO Auto-generated method stub
 		return articledao.search(label);
+	}
+
+	@Override
+	public Integer getMaxArticleId() {
+		return articledao.getMaxArticleId();
 	}
 
 }

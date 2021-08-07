@@ -15,10 +15,10 @@ public class AlbumDaoImpl implements AlbumDao {
 
 	@Autowired
 	private AlbumMapper albumMapper;
-	
+
 	@Override
 	public void insert(Album entity) {
-		
+
 		// 插入相册
 		albumMapper.insert(entity);
 	}
@@ -38,14 +38,14 @@ public class AlbumDaoImpl implements AlbumDao {
 
 	@Override
 	public void update(Album entity) {
-		
+
 		// 更新
 		albumMapper.updateById(entity);
 	}
 
 	@Override
 	public List<Album> getAll() {
-		
+
 		// 返回所有的相册列表
 		return albumMapper.selectList(null);
 	}

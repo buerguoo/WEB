@@ -1,5 +1,6 @@
 package com.java.demo.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -159,4 +160,12 @@ public class ArticleController {
 		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
 	}
 
+	@CrossOrigin
+	@RequestMapping("/article/edit")
+	public ResponseWrapper<String> postArticle(@RequestParam("title") String title, @RequestParam("content") String content) {
+		Integer maxId = articleService.getMaxArticleId();
+		Article article = new Article(maxId + 1, title, "日记", 0, 0, content, new Timestamp(System.currentTimeMillis()));
+		articleService.addArticle(article);
+		return new ResponseWrapper<String>(article.getArticleName());
+	}
 }

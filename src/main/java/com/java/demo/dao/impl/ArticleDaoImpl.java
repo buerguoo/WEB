@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.java.demo.dao.ArticleDao;
 import com.java.demo.mapper.ArticleMapper;
 import com.java.demo.model.entity.Article;
+import com.java.demo.model.entity.ArticleComment;
 
 @Repository
 public class ArticleDaoImpl implements ArticleDao {
@@ -61,5 +63,11 @@ public class ArticleDaoImpl implements ArticleDao {
 		qw.eq("label", label);
 		return articleMapper.selectList(qw);
 	}
-
+	
+	@Override
+	public Integer getMaxArticleId() {
+		QueryWrapper<Article> queryWrapper = Wrappers.query();
+		queryWrapper.select("MAX(`article_id`) as max");
+		return (Integer) articleMapper.selectObjs(queryWrapper).get(0);
+	}
 }

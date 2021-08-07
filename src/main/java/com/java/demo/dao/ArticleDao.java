@@ -7,5 +7,7 @@ import com.java.demo.model.entity.Article;
 public interface ArticleDao extends Basedao<Article>{
 
 	List<Article> search(String label);
-
+	
+	// 获取当前最大的articleId
+	public Integer getMaxArticleId();
 }
