@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Git;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,12 +29,13 @@ public class ArticleController {
 	//获取所有文章信息
 	@CrossOrigin
 	@RequestMapping({"/article/ShowArticleAll","/nav/ActiveClassAllData"})
-	public ResponseWrapper<Article> ShowArticleList(@PathParam("art_id") int artId,
-																@PathParam("cate_id") int cateId,
-																@PathParam("article_name") String artname)
+	public ResponseWrapper<Article> ShowArticle(@PathParam("art_id") String artId)
 	{
-		Article article = articleService.getArticleById(artId);
-		if(article.getArticleName()==artname)
+		int n = 0;
+		if(artId!=null)
+			n = Integer.valueOf(artId);
+		Article article = articleService.getArticleById(n);
+		if(article!=null)
 			return new ResponseWrapper<Article>(article);
 		else {
 			return new ResponseWrapper<Article>(ResponseStatus.FAIL_4000 ,article);
@@ -42,10 +44,10 @@ public class ArticleController {
 	
 	//根据id获取文章信息
 	@CrossOrigin
-	@RequestMapping("/article/getArticleInfo")
-	public ResponseWrapper<Article> ShowArticleInfo(@PathVariable("art_id") int articleId)
+	@RequestMapping({"/article/getArticleInfo","/DetailShare","/Share"})
+	public ResponseWrapper<Article> ShowArticleInfo(@PathVariable("artId") String artId)
 	{
-		Article article = articleService.getArticleById(articleId);
+		Article article = articleService.getArticleById(Integer.valueOf(artId));
 		
 		ResponseWrapper<Article> responseWrapper = null;
 		if(article == null)
@@ -58,7 +60,7 @@ public class ArticleController {
 	
 	//获取前number个评论最多的文章
 	@CrossOrigin
-	@RequestMapping("/article/ShowArtCommentCount")
+	@RequestMapping("article/ShowArtCommentCount")
 	public ResponseWrapper<List<Article>> ShowMostPopularArticle(int number)
 	{
 		Collection<Article> articles = articleService.getAllArticles();
@@ -85,14 +87,14 @@ public class ArticleController {
 			return new ResponseWrapper<List<Article>>(as.subList(0, number));
 	}
 	
-	@CrossOrigin
-	@RequestMapping("/article/ArtClassData")
-	public ResponseWrapper<Collection<Article>> ShowArtClassSearch(@RequestParam(value="label",required = false) String label )
-	{
-		Collection<Article> as = articleService.getArticlesByLabel(label);
-		return new ResponseWrapper<Collection<Article>>(as);
-//		System.out.println(id);
-//		return null;
-	}
+//	@CrossOrigin
+//	@RequestMapping({"/article/ArtClassData"})
+//	public ResponseWrapper<Collection<Article>> ShowArtClassSearch()
+//	{
+//		Collection<Article> as = articleService.getAllArticles();
+//		return new ResponseWrapper<Collection<Article>>(as);
+////		System.out.println(id);
+////		return null;
+//	}
 	
 }
