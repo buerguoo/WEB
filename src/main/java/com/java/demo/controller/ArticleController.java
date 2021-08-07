@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Git;
 import org.springframework.stereotype.Controller;
@@ -25,12 +27,17 @@ public class ArticleController {
 	ArticleService articleService;
 	//获取所有文章信息
 	@CrossOrigin
-	@RequestMapping({"/article/ArticleAll","/nav/ActiveClassAllData"})
-	public ResponseWrapper<Collection<Article>> ShowArticleList()
+	@RequestMapping({"/article/ShowArticleAll","/nav/ActiveClassAllData"})
+	public ResponseWrapper<Article> ShowArticleList(@PathParam("art_id") int artId,
+																@PathParam("cate_id") int cateId,
+																@PathParam("article_name") String artname)
 	{
-		Collection<Article> articles = articleService.getAllArticles();
-		ResponseWrapper<Collection<Article>> responseWrapper = new ResponseWrapper<Collection<Article>>(articles);
-		return responseWrapper;
+		Article article = articleService.getArticleById(artId);
+		if(article.getArticleName()==artname)
+			return new ResponseWrapper<Article>(article);
+		else {
+			return new ResponseWrapper<Article>(ResponseStatus.FAIL_4000 ,article);
+		}
 	}	
 	
 	//根据id获取文章信息
@@ -87,4 +94,5 @@ public class ArticleController {
 //		System.out.println(id);
 //		return null;
 	}
+	
 }
