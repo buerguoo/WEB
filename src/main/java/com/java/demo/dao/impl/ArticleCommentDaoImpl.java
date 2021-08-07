@@ -3,7 +3,6 @@ package com.java.demo.dao.impl;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
