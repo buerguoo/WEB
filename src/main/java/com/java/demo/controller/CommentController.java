@@ -2,6 +2,8 @@ package com.java.demo.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,24 +24,24 @@ public class CommentController {
 	// 查询文章评论数据
 	@CrossOrigin
 	@GetMapping("/comment/ArticleComment")
-	public ResponseWrapper<ArticleComment> ArticleComment(@RequestParam("art_id") String articleId,
+	public ResponseWrapper<List<ArticleComment>> ArticleComment(@RequestParam("art_id") String articleId,
 										@RequestParam("comment_id") String commentId) {
 		
-		// 获取单个评论, 需要增加业务
-		ArticleComment articleComment = arciArticleCommentService.getArticleCommentById(Integer.valueOf(commentId));
+		// 获取文章评论, 需要增加业务
+		List<ArticleComment> articleComments = arciArticleCommentService.getArticleCommentsByArticleId(Integer.valueOf(articleId));
 		
-		return new ResponseWrapper<ArticleComment>(articleComment);
+		return new ResponseWrapper<List<ArticleComment>>(articleComments);
 	}
 	
 	// 查询其他评论数据
 	@CrossOrigin
 	@GetMapping("/comment/OtherComment")
-	public ResponseWrapper<ArticleComment> OtherComment(@RequestParam("leave_id") String leaveId, 
+	public ResponseWrapper<List<ArticleComment>> OtherComment(@RequestParam("leave_id") String leaveId, 
 														@RequestParam("comment_id") String commentId){
 		// 获取其他评论
-		ArticleComment articleComment = arciArticleCommentService.getArticleCommentById(Integer.valueOf(commentId));
+		List<ArticleComment> articleComments = arciArticleCommentService.getArticleCommentsByLeaveId(Integer.valueOf(leaveId));
 		
-		return new ResponseWrapper<ArticleComment>(articleComment);
+		return new ResponseWrapper<List<ArticleComment>>(articleComments);
 	}
 	
 	// 添加文章评论
@@ -56,7 +58,9 @@ public class CommentController {
 		// leave_id 
 		// 获取当前时间
 		
-		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
+		int maxCommentId = arciArticleCommentService.getMaxCommentId();
+		
+		ArticleComment articleComment = new ArticleComment(++maxCommentId , 
 				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, Integer.valueOf(pId), content, new Timestamp(System.currentTimeMillis()));
 		
 		arciArticleCommentService.addArticleComment(articleComment);
@@ -74,8 +78,10 @@ public class CommentController {
 										   @RequestParam("leave_pid") String leavePid,
 										   @RequestParam("pid") String pId){
 		// ...
+		//http://localhost:8080/comment/setOuthComment?content=fdsaff%20&user_id=0&article_id=1&leave_id=3&leave_pid=&pid=
+		int maxCommentId = arciArticleCommentService.getMaxCommentId();
 		
-		ArticleComment articleComment = new ArticleComment(arciArticleCommentService.getMaxCommentId() , 
+		ArticleComment articleComment = new ArticleComment( ++maxCommentId, 
 				Integer.valueOf(articleId), Integer.valueOf(userId), Integer.valueOf(leaveId), 0, 0, content, new Timestamp(System.currentTimeMillis()));
 		
 		arciArticleCommentService.addArticleComment(articleComment);

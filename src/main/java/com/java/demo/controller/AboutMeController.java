@@ -20,7 +20,7 @@ public class AboutMeController {
 	@Autowired
 	UserService userService;
 	@CrossOrigin
-	@RequestMapping("/outh/AboutMeData")
+	//@RequestMapping("/outh/AboutMeData")
 	//查询关于我
 	public ResponseWrapper<User> ShowAboutMe(@PathParam("user_id") int id)
 	{
