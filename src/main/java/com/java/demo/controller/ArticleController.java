@@ -85,7 +85,7 @@ public class ArticleController {
 		List<Article> as = new ArrayList<Article>();
 		for (Article a : articles)
 			as.add(a);
-		Collections.sort(as, new Comparator<Article>() {// 重写排序函数！！！
+		Collections.sort(as, new Comparator<Article>() {// 输出结果有问题，不是排序函数出错就是别的地方有问题
 			public int compare(Article a1, Article a2) {
 				int n1 = a1.getCommentCount();
 				int n2 = a2.getCommentCount();
@@ -160,6 +160,7 @@ public class ArticleController {
 		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
 	}
 
+	//发布文章，需要修改！！等前端把文章标签加上，多传一个标签的参数
 	@CrossOrigin
 	@RequestMapping("/article/edit")
 	public ResponseWrapper<String> postArticle(@RequestParam("title") String title, @RequestParam("content") String content) {
