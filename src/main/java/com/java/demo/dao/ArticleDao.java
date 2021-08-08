@@ -11,6 +11,4 @@ public interface ArticleDao extends Basedao<Article>{
 	// 获取当前最大的articleId
 	public Integer getMaxArticleId();
 	
-	// 获取所有文章类型
-	public List<String> getAllCateGories();
 }

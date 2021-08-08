@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.java.demo.model.entity.Article;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.model.entity.User;
+import com.java.demo.model.response.ArticleClassResponse;
 import com.java.demo.model.response.ArticleResponse;
 import com.java.demo.model.response.ArticleRightResponse;
 import com.java.demo.model.utils.ResponseStatus;
@@ -156,22 +157,17 @@ public class ArticleController {
 
 	@CrossOrigin
 	@RequestMapping({ "/article/ArtClassData" })
-	public ResponseWrapper<List<ArticleResponse>> ShowArtClassSearch() {
-		List<Article> as = articleService.getAllArticles();
-		List<ArticleResponse> articleResponses = new ArrayList<>();
-		for (Article article : as) {
-			//设置时间格式
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = new Date(article.getPostTime().getTime());
-			String t = df.format(date);
-			Timestamp ts = Timestamp.valueOf(t);
-			
-			ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
-					ts, article.getViewCount(), article.getCommentCount(), article.getLabel(),
-					article.getContent());
-			articleResponses.add(articleResponse);
+	public ResponseWrapper<List<ArticleClassResponse>> ShowArtClassSearch() {
+		List<ArticleClassResponse> articleClassList = new ArrayList<>();
+		ArticleClassResponse[] articleClassResponses = new ArticleClassResponse[4];
+		articleClassResponses[0]=new ArticleClassResponse("日记");
+		articleClassResponses[1]=new ArticleClassResponse("技术");
+		articleClassResponses[2]=new ArticleClassResponse("美食");
+		articleClassResponses[3]=new ArticleClassResponse("感悟");
+		for(ArticleClassResponse articleClassResponse:articleClassResponses) {
+			articleClassList.add(articleClassResponse);
 		}
-		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
+		return new ResponseWrapper<List<ArticleClassResponse>>(articleClassList);
 	}
 
 	//发布文章，需要修改！！等前端把文章标签加上，多传一个标签的参数
