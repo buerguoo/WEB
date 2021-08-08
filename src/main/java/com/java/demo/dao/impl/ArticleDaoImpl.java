@@ -70,4 +70,11 @@ public class ArticleDaoImpl implements ArticleDao {
 		queryWrapper.select("MAX(`article_id`) as max");
 		return (Integer) articleMapper.selectObjs(queryWrapper).get(0);
 	}
+	@Override
+	public List<Article> fuzzysearchByName(String str)
+	{
+		QueryWrapper<Article> queryWrapper = Wrappers.query();
+		queryWrapper.like("articleName",str);
+		return articleMapper.selectList(queryWrapper);
+	}
 }
