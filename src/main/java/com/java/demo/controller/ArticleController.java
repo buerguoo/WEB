@@ -71,7 +71,7 @@ public class ArticleController {
 		for(int i = 0;i < size;++i) {
 				Article article = articles.get(size - 1 -i);
 				
-				ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
+				ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
 						article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
 						article.getContent());
 				articleResponses.add(articleResponse);
@@ -86,10 +86,6 @@ public class ArticleController {
 	@RequestMapping("/article/getArticleInfo")
 	public ResponseWrapper<ArticleResponse> ShowArticleInfo(@RequestParam("art_id") Integer artId,
 			@RequestParam("user_id") Integer userId) {
-		
-		int maxArtId = articleService.getMaxArticleId();
-		artId = maxArtId - artId;
-
 		
 		Article article = articleService.getArticleById(artId);
 		ArticleResponse articleResponse = null;
