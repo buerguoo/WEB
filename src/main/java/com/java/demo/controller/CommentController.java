@@ -1,12 +1,9 @@
 package com.java.demo.controller;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +19,6 @@ import com.java.demo.model.utils.ResponseWrapper;
 import com.java.demo.service.ArticleCommentService;
 import com.java.demo.service.ArticleService;
 import com.java.demo.service.UserService;
-import com.sun.istack.internal.NotNull;
 
 @RestController
 public class CommentController {
@@ -111,8 +107,7 @@ public class CommentController {
 	@CrossOrigin
 	@GetMapping("/comment/setArticleComment")
 	public ResponseWrapper<ArticleComment> setArticleCommet(@RequestParam("content") String content,
-			@RequestParam("user_id") String userId, @RequestParam("article_id") String articleId,
-			@RequestParam("leave_id") String leaveId, @RequestParam("pid") String pId) {
+			@RequestParam("user_id") Integer userId, @RequestParam("article_id") Integer articleId) {
 		// content 内容
 		// user_id 发送者id
 		// article_id 文章id
@@ -121,19 +116,19 @@ public class CommentController {
 
 		int maxCommentId = arciArticleCommentService.getMaxCommentId();
 		int tempId;
-		if (userId == "") {
+		if (userId == null) {
 			tempId = -1;
 		} else {
 			tempId = Integer.valueOf(userId);
 		}
 		// 添加文章评论需要增加评论个数
-		Article article = articleService.getArticleById(Integer.valueOf(articleId));
+		Article article = articleService.getArticleById(articleId);
 		int tempCommentCount = article.getCommentCount();
 		article.setCommentCount(++tempCommentCount);
 		articleService.updateArticleById(article);
 		
-		ArticleComment articleComment = new ArticleComment(++maxCommentId, Integer.valueOf(articleId), tempId,
-				Integer.valueOf(leaveId), 0, Integer.valueOf(pId), content, new Timestamp(System.currentTimeMillis()));
+		ArticleComment articleComment = new ArticleComment(++maxCommentId, articleId, tempId,
+				0, 0, 0, content, new Timestamp(System.currentTimeMillis()));
 
 		arciArticleCommentService.addArticleComment(articleComment);
 

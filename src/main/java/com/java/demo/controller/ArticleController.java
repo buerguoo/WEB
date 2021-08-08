@@ -59,8 +59,12 @@ public class ArticleController {
 	@RequestMapping("/article/getArticleInfo")
 	public ResponseWrapper<ArticleResponse> ShowArticleInfo(@RequestParam("art_id") Integer artId,
 			@RequestParam("user_id") Integer userId) {
-
-		Article article = articleService.getArticleById(Integer.valueOf(artId));
+		
+		int maxArtId = articleService.getMaxArticleId();
+		
+		artId = maxArtId - artId;
+		
+		Article article = articleService.getArticleById(artId);
 		ArticleResponse articleResponse = null;
 		ResponseWrapper<ArticleResponse> responseWrapper = null;
 		
@@ -106,7 +110,7 @@ public class ArticleController {
 			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
 			User user = userService.getUserById(articleComment.getUserId());
 			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
-					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent());
+					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent(), article.getViewCount());
 			articleRightResponses.add(articleRightResponse);
 		}
 		if (articleRightResponses.size() < 10)
@@ -127,11 +131,11 @@ public class ArticleController {
 				int n1 = a1.getViewCount();
 				int n2 = a2.getViewCount();
 				if (n1 > n2)
-					return 1;
+					return -1;
 				else if (n1 == n2)
 					return 0;
 				else {
-					return -1;
+					return 1;
 				}
 			}
 		});
@@ -140,7 +144,7 @@ public class ArticleController {
 			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
 			User user = userService.getUserById(articleComment.getUserId());
 			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
-					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent());
+					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent(), article.getViewCount());
 			articleRightResponses.add(articleRightResponse);
 		}
 		if (articleRightResponses.size() < 10)
