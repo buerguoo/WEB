@@ -155,13 +155,13 @@ public class CommentController {
 			tempId = userId;
 		}
 		// 创建数据库对象并写入数据库
-		if(leaveId == null || pId == null) {
-			leaveId = -1;
-			pId = -1;
-		}
+//		if(leaveId == null || pId == null) {
+//			leaveId = -1;
+//			pId = -1;
+//		}
 		ArticleComment articleComment = new ArticleComment(
 				++maxCommentId, articleId, tempId,
-				leaveId, leavePid, pId, content, new Timestamp(System.currentTimeMillis()));
+				leaveId, 0, 0, content, new Timestamp(System.currentTimeMillis()));
 		arciArticleCommentService.addArticleComment(articleComment);
 		ArticleCommentResponse  articleCommentResponse = null;
 		// 创建响应对象并返回
