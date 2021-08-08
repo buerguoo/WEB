@@ -240,9 +240,10 @@ public class ArticleController {
 	//发布文章，需要修改！！等前端把文章标签加上，多传一个标签的参数
 	@CrossOrigin
 	@RequestMapping("/article/edit")
-	public ResponseWrapper<String> postArticle(@RequestParam("title") String title, @RequestParam("content") String content) {
+	public ResponseWrapper<String> postArticle(@RequestParam("title") String title, @RequestParam("content") String content, 
+			@RequestParam("label") String label) {
 		Integer maxId = articleService.getMaxArticleId();
-		Article article = new Article(maxId + 1, title, "日记", 0, 0, content, new Timestamp(System.currentTimeMillis()));
+		Article article = new Article(maxId + 1, title, label, 0, 0, content, new Timestamp(System.currentTimeMillis()));
 		articleService.addArticle(article);
 		return new ResponseWrapper<String>(article.getArticleName());
 	}

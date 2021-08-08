@@ -88,6 +88,7 @@ public class CommentController {
 					tempIndex = tempIndex + 1;
 				// 按时间从新到旧排序
 				ArticleComment articleComment = articleComments.get(articleComments.size() - 1 - i);
+				System.out.println(articleComment);
 				// 获取对应的用户
 				User user = userService.getUserById(articleComment.getUserId());
 				// 创建返回体
@@ -155,9 +156,13 @@ public class CommentController {
 			tempId = userId;
 		}
 		// 创建数据库对象并写入数据库
+		if(leaveId == null || pId == null) {
+			leaveId = -1;
+			pId = -1;
+		}
 		ArticleComment articleComment = new ArticleComment(
 				++maxCommentId, articleId, tempId,
-				leaveId, 0, 0, content, new Timestamp(System.currentTimeMillis()));
+				leaveId, leavePid, pId, content, new Timestamp(System.currentTimeMillis()));
 		arciArticleCommentService.addArticleComment(articleComment);
 		ArticleCommentResponse  articleCommentResponse = null;
 		// 创建响应对象并返回
