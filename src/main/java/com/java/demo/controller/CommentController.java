@@ -37,7 +37,10 @@ public class CommentController {
 	@GetMapping("/comment/ArticleComment")
 	public ResponseWrapper<List<ArticleCommentResponse>> ArticleComment(@RequestParam("art_id") Integer articleId,
 			@RequestParam("comment_id") Integer pageId) {
-
+		
+		int tmpMaxArtId = articleService.getMaxArticleId();
+		articleId = tmpMaxArtId - articleId;
+		
 		List<ArticleCommentResponse> articleCommentResponses = new ArrayList<>();
 		// 获取文章评论, 需要增加业务
 		if (articleId != null) {
