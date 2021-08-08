@@ -71,7 +71,7 @@ public class ArticleController {
 			articles = articleService.getArticlesByLabel(tempLabel);
 		}
 		else {
-			//articles = articleService.getSearchArticles(articleName);
+			articles = articleService.getSearchArticles(articleName);
 		}
 		Integer tempId = artId;
 		int size = articles.size();
