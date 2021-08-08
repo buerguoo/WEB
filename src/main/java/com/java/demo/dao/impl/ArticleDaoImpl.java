@@ -77,4 +77,22 @@ public class ArticleDaoImpl implements ArticleDao {
 		queryWrapper.like("articleName",str);
 		return articleMapper.selectList(queryWrapper);
 	}
+
+	@Override
+	public List<String> getAllCateGories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//	@Override
+//	public List<String> getAllCateGories(){
+//		QueryWrapper<Article> queryWrapper = Wrappers.query();
+		//queryWrapper.eq(true, column, "");
+		//List<String> results =  articleMapper.selectList(queryWrapper);
+//		for(String str: results) {
+//			System.out.println(str);
+//		}
+//		return results;
+//	}
+>>>>>>> 49f1703d7cc5393c9ebe56d50d6c687c4a8667a9
 }
