@@ -1,20 +1,15 @@
 package com.java.demo.controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,14 +69,13 @@ public class ArticleController {
 		Integer tempId = artId;
 		int size = articles.size();
 		for(int i = 0;i < size;++i) {
-			if(i != size - 2) {
 				Article article = articles.get(size - 1 -i);
 				
 				ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
 						article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
 						article.getContent());
 				articleResponses.add(articleResponse);
-			}
+			
 			
 		}
 		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
@@ -94,9 +88,8 @@ public class ArticleController {
 			@RequestParam("user_id") Integer userId) {
 		
 		int maxArtId = articleService.getMaxArticleId();
-		if(artId != 1) {
-			artId = maxArtId - artId;
-		}
+		artId = maxArtId - artId;
+
 		
 		Article article = articleService.getArticleById(artId);
 		ArticleResponse articleResponse = null;
