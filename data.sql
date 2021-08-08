@@ -27,10 +27,10 @@ create table Article(
 	`posttime` TIMESTAMP,
     primary key(`article_id`));
 insert into Article
-	values(1,'我去宁波实习','日记',0,0,'我******，感觉身体被掏空！','2021-8-7 10:01:01'),
-	(2,'我去武汉隔离','日记',0,0,'我******，感觉身体被灌满！','2021-8-7 10:01:01'),
-	(3,'我去网上冲浪','日记',0,0,'我******，感觉身体变硬了！','2021-8-7 10:01:01'),
-	(4,'我去楼顶吹风','日记',0,0,'<h1>风好大</h1><br><h2>我好冷</h2>','2021-8-7 10:01:01');
+	values(1,'我去宁波实习','日记',0,0,'感觉身体被掏空','2021-8-7 10:01:01'),
+	(2,'我去武汉隔离','日记',0,0,'已经无法呼吸','2021-8-7 10:01:01'),
+	(3,'我去网上冲浪','技术',0,0,'风好大，我好冷','2021-8-7 10:01:01'),
+	(4,'我去楼顶吹风','新得',0,0,'<h1>风好大</h1><br><h2>我好冷</h2>','2021-8-7 10:01:01');
 
     
 #留言
@@ -70,21 +70,11 @@ create table Comment(
 	(6,2,0,0,0,0,'哟，几天不见这么拉了','2021-8-7 10:01:01');
 
     
-    CREATE TABLE `personalweb`.`likecount` (
+  CREATE TABLE `personalweb`.`likecount` (
   `id` INT NOT NULL DEFAULT 0,
   `likeCount` INT NULL DEFAULT 100,
   PRIMARY KEY (`id`));
 
-    #create table Album(
-#	id_al int,
-#   owner_al char(32),
-#   createTime_al date);
-
-#create table Photo(
-#	id_ph int,
-#   name_ph char(16),
-#  	path_ph char(64),
-# 	album_ph int);
 
     
 
