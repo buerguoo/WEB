@@ -74,11 +74,15 @@ public class ArticleController {
 		Integer tempId = artId;
 		int size = articles.size();
 		for(int i = 0;i < size;++i) {
-			Article article = articles.get(size - 1 -i);
-			ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
-					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
-					article.getContent());
-			articleResponses.add(articleResponse);
+			if(i != size - 2) {
+				Article article = articles.get(size - 1 -i);
+				
+				ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
+						article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
+						article.getContent());
+				articleResponses.add(articleResponse);
+			}
+			
 		}
 		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
 	}
@@ -90,8 +94,9 @@ public class ArticleController {
 			@RequestParam("user_id") Integer userId) {
 		
 		int maxArtId = articleService.getMaxArticleId();
-		
-		artId = maxArtId - artId;
+		if(artId != 1) {
+			artId = maxArtId - artId;
+		}
 		
 		Article article = articleService.getArticleById(artId);
 		ArticleResponse articleResponse = null;

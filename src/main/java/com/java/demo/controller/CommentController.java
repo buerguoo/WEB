@@ -88,7 +88,6 @@ public class CommentController {
 					tempIndex = tempIndex + 1;
 				// 按时间从新到旧排序
 				ArticleComment articleComment = articleComments.get(articleComments.size() - 1 - i);
-				System.out.println(articleComment);
 				// 获取对应的用户
 				User user = userService.getUserById(articleComment.getUserId());
 				// 创建返回体
