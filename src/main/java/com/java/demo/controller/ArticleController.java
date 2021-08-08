@@ -92,11 +92,11 @@ public class ArticleController {
 				int n1 = a1.getCommentCount();
 				int n2 = a2.getCommentCount();
 				if (n1 > n2)
-					return 1;
+					return -1;
 				else if (n1 == n2)
 					return 0;
 				else {
-					return -1;
+					return 1;
 				}
 			}
 		});
