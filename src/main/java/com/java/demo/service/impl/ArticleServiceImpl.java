@@ -72,7 +72,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getSearchArticles(String articleName) {
 		// TODO Auto-generated method stub
-		return null;
+		return articledao. fuzzysearchByName(articleName);
 	}
 
 }
