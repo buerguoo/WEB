@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -45,11 +46,8 @@ public class ArticleController {
 	public ResponseWrapper<List<ArticleResponse>> ShowArticle(@RequestParam("art_id") Integer artId,
 			@RequestParam("cate_id") Integer cateId, @RequestParam("article_name") String articleName) {
 		List<ArticleResponse> articleResponses = new ArrayList<>();
-		List<Article> articles =null;
-			 articles = articleService.getAllArticles();
-		if(artId==null||cateId==null||articleName=="")
-		 articles = articleService.getAllArticles();
-		else if(cateId != 0)
+		List<Article> articles = articleService.getAllArticles();
+		if(cateId!=null&&cateId != 0)
 		{
 			String tempLabel = null;
 			switch(cateId) {
@@ -70,7 +68,7 @@ public class ArticleController {
 			}
 			articles = articleService.getArticlesByLabel(tempLabel);
 		}
-		else {
+		if(articleName!="") {
 			articles = articleService.getSearchArticles(articleName);
 		}
 		Integer tempId = artId;
@@ -186,6 +184,7 @@ public class ArticleController {
 
 	@CrossOrigin
 	@RequestMapping({ "/article/ArtClassData" })
+
 	public ResponseWrapper<List<ArticleClassResponse>> ShowArtClassSearch() {
 		List<ArticleClassResponse> articleClassList = new ArrayList<>();
 		ArticleClassResponse[] articleClassResponses = new ArticleClassResponse[4];
@@ -197,6 +196,7 @@ public class ArticleController {
 			articleClassList.add(articleClassResponse);
 		}
 		return new ResponseWrapper<List<ArticleClassResponse>>(articleClassList);
+
 	}
 
 //	@CrossOrigin
