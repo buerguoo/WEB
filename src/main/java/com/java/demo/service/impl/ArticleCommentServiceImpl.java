@@ -107,7 +107,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 	public ArticleComment getLastArticleComment(Integer articleId) {
 
 		List<ArticleComment> articleComments = articlecommentdao.getAllArticleComments(articleId);
-		Integer max = -1;
+		Integer max = 0;
 		for (ArticleComment articleComment : articleComments) {
 			if (articleComment.getCommentId() > max) {
 				max = articleComment.getCommentId();

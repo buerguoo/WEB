@@ -70,4 +70,21 @@ public class ArticleDaoImpl implements ArticleDao {
 		queryWrapper.select("MAX(`article_id`) as max");
 		return (Integer) articleMapper.selectObjs(queryWrapper).get(0);
 	}
+
+	@Override
+	public List<String> getAllCateGories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//	@Override
+//	public List<String> getAllCateGories(){
+//		QueryWrapper<Article> queryWrapper = Wrappers.query();
+		//queryWrapper.eq(true, column, "");
+		//List<String> results =  articleMapper.selectList(queryWrapper);
+//		for(String str: results) {
+//			System.out.println(str);
+//		}
+//		return results;
+//	}
 }
