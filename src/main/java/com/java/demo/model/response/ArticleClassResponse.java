@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleClassResponse {
+	private Integer class_id;
 	private String cate_name;// 分类名称
 }

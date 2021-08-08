@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,8 +44,35 @@ public class ArticleController {
 	@RequestMapping("/article/ShowArticleAll")
 	public ResponseWrapper<List<ArticleResponse>> ShowArticle(@RequestParam("art_id") Integer artId,
 			@RequestParam("cate_id") Integer cateId, @RequestParam("article_name") String articleName) {
-		List<Article> articles = articleService.getAllArticles();
 		List<ArticleResponse> articleResponses = new ArrayList<>();
+		List<Article> articles =null;
+			 articles = articleService.getAllArticles();
+		if(artId==null||cateId==null||articleName=="")
+		 articles = articleService.getAllArticles();
+		else if(cateId != 0)
+		{
+			String tempLabel = null;
+			switch(cateId) {
+			case 1:
+				tempLabel="日记";
+				break;
+			case 2:
+				tempLabel="技术";
+				break;
+			case 3:
+				tempLabel="美食";
+				break;
+			case 4:
+				tempLabel="感悟";
+				break;
+				default:
+					tempLabel = "日记";
+			}
+			articles = articleService.getArticlesByLabel(tempLabel);
+		}
+		else {
+			//articles = articleService.getSearchArticles(articleName);
+		}
 		Integer tempId = artId;
 		int size = articles.size();
 		for(int i = 0;i < size;++i) {
@@ -160,16 +189,54 @@ public class ArticleController {
 	public ResponseWrapper<List<ArticleClassResponse>> ShowArtClassSearch() {
 		List<ArticleClassResponse> articleClassList = new ArrayList<>();
 		ArticleClassResponse[] articleClassResponses = new ArticleClassResponse[4];
-		articleClassResponses[0]=new ArticleClassResponse("日记");
-		articleClassResponses[1]=new ArticleClassResponse("技术");
-		articleClassResponses[2]=new ArticleClassResponse("美食");
-		articleClassResponses[3]=new ArticleClassResponse("感悟");
+		articleClassResponses[0]=new ArticleClassResponse(1,"日记");
+		articleClassResponses[1]=new ArticleClassResponse(2,"技术");
+		articleClassResponses[2]=new ArticleClassResponse(3,"美食");
+		articleClassResponses[3]=new ArticleClassResponse(4,"感悟");
 		for(ArticleClassResponse articleClassResponse:articleClassResponses) {
 			articleClassList.add(articleClassResponse);
 		}
 		return new ResponseWrapper<List<ArticleClassResponse>>(articleClassList);
 	}
 
+//	@CrossOrigin
+//	@PostMapping({ "/article/ArtClassData" })
+//	public ResponseWrapper<List<ArticleResponse>> ShowArtClassSearch(@RequestParam("classId") Integer classId) {
+//		List<ArticleResponse> articleResponses = new ArrayList<>();
+//		if(classId==null) {
+//			return new ResponseWrapper<List<ArticleResponse>>(ResponseStatus.FAIL_4000,articleResponses);
+//		}
+//		String tempLabel = null;
+//		switch(classId) {
+//		case 0:
+//			tempLabel="日记";
+//			break;
+//		case 1:
+//			tempLabel="技术";
+//			break;
+//		case 2:
+//			tempLabel="美食";
+//			break;
+//		case 3:
+//			tempLabel="感悟";
+//			break;
+//			default:
+//				tempLabel = "日记";
+//		}
+//		List<Article> articles = articleService.getArticlesByLabel(tempLabel);
+//	
+//		Integer tempId = 0;
+//		int size = articles.size();
+//		for(int i = 0;i < size;++i) {
+//			Article article = articles.get(size - 1 -i);
+//			ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
+//					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
+//					article.getContent());
+//			articleResponses.add(articleResponse);
+//		}
+//		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
+//	}
+	
 	//发布文章，需要修改！！等前端把文章标签加上，多传一个标签的参数
 	@CrossOrigin
 	@RequestMapping("/article/edit")
