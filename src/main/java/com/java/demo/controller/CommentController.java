@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.java.demo.model.entity.Article;
 import com.java.demo.model.entity.ArticleComment;
 import com.java.demo.model.entity.User;
 import com.java.demo.model.response.ArticleCommentResponse;
 import com.java.demo.model.utils.ResponseWrapper;
 import com.java.demo.service.ArticleCommentService;
+import com.java.demo.service.ArticleService;
 import com.java.demo.service.UserService;
 import com.sun.istack.internal.NotNull;
 
@@ -30,6 +32,9 @@ public class CommentController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ArticleService articleService;
 
 	// 查询文章评论数据
 	@CrossOrigin
@@ -121,6 +126,12 @@ public class CommentController {
 		} else {
 			tempId = Integer.valueOf(userId);
 		}
+		// 添加文章评论需要增加评论个数
+		Article article = articleService.getArticleById(Integer.valueOf(articleId));
+		int tempCommentCount = article.getCommentCount();
+		article.setCommentCount(++tempCommentCount);
+		articleService.updateArticleById(article);
+		
 		ArticleComment articleComment = new ArticleComment(++maxCommentId, Integer.valueOf(articleId), tempId,
 				Integer.valueOf(leaveId), 0, Integer.valueOf(pId), content, new Timestamp(System.currentTimeMillis()));
 

@@ -7,15 +7,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Git;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +42,9 @@ public class ArticleController {
 		List<Article> articles = articleService.getAllArticles();
 		List<ArticleResponse> articleResponses = new ArrayList<>();
 		Integer tempId = artId;
-		for (Article article : articles) {
+		int size = articles.size();
+		for(int i = 0;i < size;++i) {
+			Article article = articles.get(size - 1 -i);
 			ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
 					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
 					article.getContent());
@@ -66,9 +62,15 @@ public class ArticleController {
 		Article article = articleService.getArticleById(Integer.valueOf(artId));
 		ArticleResponse articleResponse = null;
 		ResponseWrapper<ArticleResponse> responseWrapper = null;
+		
 		if (article == null)
 			responseWrapper = new ResponseWrapper<ArticleResponse>(ResponseStatus.FAIL_4000, articleResponse);
 		else {
+			// 获取文章id后要增加浏览次数
+			int tempViewCount = article.getViewCount();
+			article.setViewCount(++tempViewCount);
+			articleService.updateArticleById(article);
+			
 			articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
 					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
 					article.getContent());
