@@ -2,6 +2,7 @@ package com.java.demo.controller;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -159,12 +160,14 @@ public class ArticleController {
 		List<Article> as = articleService.getAllArticles();
 		List<ArticleResponse> articleResponses = new ArrayList<>();
 		for (Article article : as) {
+			//设置时间格式
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date(article.getPostTime().getTime());
-			date.setHours(0);
-			date.setMinutes(0);
-			date.setSeconds(0);
+			String t = df.format(date);
+			Timestamp ts = Timestamp.valueOf(t);
+			
 			ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
-					date, article.getViewCount(), article.getCommentCount(), article.getLabel(),
+					ts, article.getViewCount(), article.getCommentCount(), article.getLabel(),
 					article.getContent());
 			articleResponses.add(articleResponse);
 		}
