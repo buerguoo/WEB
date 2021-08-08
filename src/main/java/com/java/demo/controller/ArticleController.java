@@ -1,5 +1,6 @@
 package com.java.demo.controller;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -154,8 +155,12 @@ public class ArticleController {
 		List<Article> as = articleService.getAllArticles();
 		List<ArticleResponse> articleResponses = new ArrayList<>();
 		for (Article article : as) {
+			Date date = new Date(article.getPostTime().getTime());
+			date.setHours(0);
+			date.setMinutes(0);
+			date.setSeconds(0);
 			ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
-					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
+					date, article.getViewCount(), article.getCommentCount(), article.getLabel(),
 					article.getContent());
 			articleResponses.add(articleResponse);
 		}
