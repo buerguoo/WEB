@@ -94,5 +94,5 @@ public class ArticleDaoImpl implements ArticleDao {
 //		}
 //		return results;
 //	}
->>>>>>> 49f1703d7cc5393c9ebe56d50d6c687c4a8667a9
+
 }
