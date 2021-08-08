@@ -14,5 +14,6 @@ public class ArticleRightResponse {
 	String nickname;
 	String title;
 	String content;
+	Integer browse_count;
 	
 }

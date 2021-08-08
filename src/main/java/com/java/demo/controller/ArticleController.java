@@ -105,7 +105,7 @@ public class ArticleController {
 			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
 			User user = userService.getUserById(articleComment.getUserId());
 			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
-					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent());
+					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent(), article.getViewCount());
 			articleRightResponses.add(articleRightResponse);
 		}
 		if (articleRightResponses.size() < 10)
@@ -139,7 +139,7 @@ public class ArticleController {
 			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
 			User user = userService.getUserById(articleComment.getUserId());
 			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
-					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent());
+					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent(), article.getViewCount());
 			articleRightResponses.add(articleRightResponse);
 		}
 		if (articleRightResponses.size() < 10)
