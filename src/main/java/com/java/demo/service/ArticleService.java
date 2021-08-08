@@ -28,4 +28,6 @@ public interface ArticleService {
 	
 	// 获取当前的最大id
 	Integer getMaxArticleId();
+
+	List<Article> getSearchArticles(String articleName);
 }

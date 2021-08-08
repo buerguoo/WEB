@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -41,7 +42,13 @@ public class ArticleController {
 	@RequestMapping("/article/ShowArticleAll")
 	public ResponseWrapper<List<ArticleResponse>> ShowArticle(@RequestParam("art_id") Integer artId,
 			@RequestParam("cate_id") Integer cateId, @RequestParam("article_name") String articleName) {
-		List<Article> articles = articleService.getAllArticles();
+		List<Article> articles = null;
+		if(articleName == "") {
+			articles = articleService.getAllArticles();
+		}else {
+			articles = articleService.getSearchArticles(articleName);
+		}
+		 
 		List<ArticleResponse> articleResponses = new ArrayList<>();
 		Integer tempId = artId;
 		int size = articles.size();
@@ -156,22 +163,25 @@ public class ArticleController {
 
 	@CrossOrigin
 	@RequestMapping({ "/article/ArtClassData" })
-	public ResponseWrapper<List<ArticleResponse>> ShowArtClassSearch() {
-		List<Article> as = articleService.getAllArticles();
-		List<ArticleResponse> articleResponses = new ArrayList<>();
-		for (Article article : as) {
-			//设置时间格式
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = new Date(article.getPostTime().getTime());
-			String t = df.format(date);
-			Timestamp ts = Timestamp.valueOf(t);
-			
-			ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
-					ts, article.getViewCount(), article.getCommentCount(), article.getLabel(),
-					article.getContent());
-			articleResponses.add(articleResponse);
-		}
-		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
+	public ResponseWrapper<List<String>> ShowArtClassSearch() {
+//		List<Article> as = articleService.getAllArticles();
+//		List<ArticleResponse> articleResponses = new ArrayList<>();
+//		for (Article article : as) {
+//			//设置时间格式
+//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			Date date = new Date(article.getPostTime().getTime());
+//			String t = df.format(date);
+//			Timestamp ts = Timestamp.valueOf(t);
+//			
+//			ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
+//					ts, article.getViewCount(), article.getCommentCount(), article.getLabel(),
+//					article.getContent());
+//			articleResponses.add(articleResponse);
+//		}
+		List<String> lists = new LinkedList<String>();
+		lists.add("a00");
+		lists.add("fda00");
+		return new ResponseWrapper<List<String>>(lists);
 	}
 
 	//发布文章，需要修改！！等前端把文章标签加上，多传一个标签的参数
