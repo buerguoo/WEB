@@ -66,7 +66,11 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Integer getMaxArticleId() {
-		return articledao.getMaxArticleId();
+		if(articledao.getMaxArticleId()!=null)
+			return articledao.getMaxArticleId();
+		else {
+			return 0;
+		}
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +27,7 @@ public class CommentController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ArticleService articleService;
 
@@ -37,14 +36,13 @@ public class CommentController {
 	@GetMapping("/comment/ArticleComment")
 	public ResponseWrapper<List<ArticleCommentResponse>> ArticleComment(@RequestParam("art_id") Integer articleId,
 			@RequestParam("comment_id") Integer pageId) {
-		
-		
+
 		List<ArticleCommentResponse> articleCommentResponses = new ArrayList<>();
 		// 获取文章评论, 需要增加业务
 		if (articleId != null) {
 			List<ArticleComment> articleComments = arciArticleCommentService.getAllArticleComments(articleId);
 			Integer tempIndex = -1;
-			
+
 			for (int i = 0; i < articleComments.size(); i++) {
 				if (i % 8 == 0)
 					tempIndex = tempIndex + 1;
@@ -59,8 +57,16 @@ public class CommentController {
 					articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
 							user.getUsername(), user.getLabel(), articleComment.getPosttime(), user.getAvatar());
 				} else {
-					articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
-							"Anonymous", "游客", articleComment.getPosttime(), "/static/img/tou.jpg");
+					String tempName = articleComment.getTempname();
+					String tempEmail = articleComment.getTempemail();
+					if (!"".equals(tempName + tempEmail)) {
+						articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
+								tempName + "[" + tempEmail + "]", "游客", articleComment.getPosttime(),
+								"/static/img/tou.jpg");
+					} else {
+						articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
+								"Anonymous", "游客", articleComment.getPosttime(), "/static/img/tou.jpg");
+					}
 				}
 				articleCommentResponses.add(articleCommentResponse);
 			}
@@ -95,8 +101,16 @@ public class CommentController {
 					articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
 							user.getUsername(), user.getLabel(), articleComment.getPosttime(), user.getAvatar());
 				} else {
-					articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
-							"Anonymous", "游客", articleComment.getPosttime(), "/static/img/tou.jpg");
+					String tempName = articleComment.getTempname();
+					String tempEmail = articleComment.getTempemail();
+					if (!"".equals(tempName + tempEmail)) {
+						articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
+								tempName + "[" + tempEmail + "]", "游客", articleComment.getPosttime(),
+								"/static/img/tou.jpg");
+					} else {
+						articleCommentResponse = new ArticleCommentResponse(tempIndex, articleComment.getContent(),
+								"Anonymous", "游客", articleComment.getPosttime(), "/static/img/tou.jpg");
+					}
 				}
 				articleCommentResponses.add(articleCommentResponse);
 			}
@@ -107,13 +121,9 @@ public class CommentController {
 	// 添加文章评论
 	@CrossOrigin
 	@GetMapping("/comment/setArticleComment")
-	public ResponseWrapper<ArticleComment> setArticleCommet(@RequestParam("content") String content,
-			@RequestParam("user_id") Integer userId, @RequestParam("article_id") Integer articleId) {
-		// content 内容
-		// user_id 发送者id
-		// article_id 文章id
-		// leave_id
-		// 获取当前时间
+	public ResponseWrapper<ArticleCommentResponse> setArticleCommet(@RequestParam("content") String content,
+			@RequestParam("user_id") Integer userId, @RequestParam("article_id") Integer articleId,
+			@RequestParam("Tname") String tempName, @RequestParam("Temail") String tempEmail) {
 
 		int maxCommentId = arciArticleCommentService.getMaxCommentId();
 		int tempId;
@@ -127,13 +137,32 @@ public class CommentController {
 		int tempCommentCount = article.getCommentCount();
 		article.setCommentCount(++tempCommentCount);
 		articleService.updateArticleById(article);
-		
-		ArticleComment articleComment = new ArticleComment(++maxCommentId, articleId, tempId,
-				0, 0, 0, content, new Timestamp(System.currentTimeMillis()));
+
+		ArticleComment articleComment = new ArticleComment(++maxCommentId, articleId, tempId, 0, 0, 0, content,
+				tempName, tempEmail, new Timestamp(System.currentTimeMillis()));
 
 		arciArticleCommentService.addArticleComment(articleComment);
 
-		return new ResponseWrapper<>(articleComment);
+		ArticleCommentResponse articleCommentResponse = null;
+		if (tempId == -1) {
+			if (!"".equals(tempName + tempEmail)) {
+				articleCommentResponse = new ArticleCommentResponse(articleComment.getCommentId(),
+						articleComment.getContent(), tempName + tempEmail, "游客", articleComment.getPosttime(),
+						"/static/img/tou.jpg");
+			} else {
+				articleCommentResponse = new ArticleCommentResponse(articleComment.getCommentId(),
+						articleComment.getContent(), "Anonymous", "游客", articleComment.getPosttime(),
+						"/static/img/tou.jpg");
+			}
+		} else {
+			User user = userService.getUserById(userId);
+			articleCommentResponse = new ArticleCommentResponse(articleComment.getCommentId(),
+					articleComment.getContent(), user.getUsername(), user.getLabel(), articleComment.getPosttime(),
+					user.getAvatar());
+		}
+		return new ResponseWrapper<>(articleCommentResponse);
+
+		// return new ResponseWrapper<>(articleComment);
 	}
 
 	// 添加其他评论
@@ -142,7 +171,8 @@ public class CommentController {
 	public ResponseWrapper<ArticleCommentResponse> setOtherComment(@RequestParam("content") String content,
 			@RequestParam("user_id") Integer userId, @RequestParam("article_id") Integer articleId,
 			@RequestParam("leave_id") Integer leaveId, @RequestParam("leave_pid") Integer leavePid,
-			@RequestParam("pid") Integer pId) {
+			@RequestParam("pid") Integer pId, @RequestParam("Tname") String tempName,
+			@RequestParam("Temail") String tempEmail) {
 		// ...
 		// http://localhost:8080/comment/setOuthComment?content=fdsaff%20&user_id=0&article_id=1&leave_id=3&leave_pid=&pid=
 		int maxCommentId = arciArticleCommentService.getMaxCommentId();
@@ -152,30 +182,28 @@ public class CommentController {
 		} else {
 			tempId = userId;
 		}
-		// 创建数据库对象并写入数据库
-//		if(leaveId == null || pId == null) {
-//			leaveId = -1;
-//			pId = -1;
-//		}
-		ArticleComment articleComment = new ArticleComment(
-				++maxCommentId, articleId, tempId,
-				leaveId, 0, 0, content, new Timestamp(System.currentTimeMillis()));
+
+		ArticleComment articleComment = new ArticleComment(++maxCommentId, articleId, tempId, leaveId, 0, 0, content,
+				tempName, tempEmail, new Timestamp(System.currentTimeMillis()));
 		arciArticleCommentService.addArticleComment(articleComment);
-		ArticleCommentResponse  articleCommentResponse = null;
+		ArticleCommentResponse articleCommentResponse = null;
 		// 创建响应对象并返回
-		
-		if(tempId == -1 ) {
-			articleCommentResponse=new ArticleCommentResponse(
-					articleComment.getCommentId(), 
-					articleComment.getContent(),
-					"Anonymous", "游客", articleComment.getPosttime(), "/static/img/tou.jpg");
-		}
-		else {
+
+		if (tempId == -1) {
+			if (tempName != null || tempEmail != null) {
+				articleCommentResponse = new ArticleCommentResponse(articleComment.getCommentId(),
+						articleComment.getContent(), tempName + tempEmail, "游客", articleComment.getPosttime(),
+						"/static/img/tou.jpg");
+			} else {
+				articleCommentResponse = new ArticleCommentResponse(articleComment.getCommentId(),
+						articleComment.getContent(), "Anonymous", "游客", articleComment.getPosttime(),
+						"/static/img/tou.jpg");
+			}
+		} else {
 			User user = userService.getUserById(userId);
-			articleCommentResponse=	new ArticleCommentResponse(
-						articleComment.getCommentId(), 
-						articleComment.getContent(),
-						user.getUsername(), user.getLabel(), articleComment.getPosttime(), user.getAvatar());
+			articleCommentResponse = new ArticleCommentResponse(articleComment.getCommentId(),
+					articleComment.getContent(), user.getUsername(), user.getLabel(), articleComment.getPosttime(),
+					user.getAvatar());
 		}
 		return new ResponseWrapper<>(articleCommentResponse);
 	}

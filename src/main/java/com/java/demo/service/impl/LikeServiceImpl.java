@@ -9,14 +9,16 @@ import com.java.demo.service.LikeService;
 
 @Service
 public class LikeServiceImpl implements LikeService {
-	
+
 	@Autowired
 	private LikeDao likeDao;
-	
+
 	@Override
 	public Integer getLikeCount() {
-		// TODO Auto-generated method stub
-		return likeDao.getLikeCount();
+		if (likeDao.getLikeCount() == null)
+			return 0;
+		else
+			return likeDao.getLikeCount();
 	}
 
 	@Override

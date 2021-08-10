@@ -20,13 +20,14 @@ public class LikeCollectDaoImpl implements LikeCollectDao {
 	private LikeCollectMapper lcmapper; 
 	@Override
 	public void insert(LikeCollect entity) {
-		// TODO Auto-generated method stub
+		
 		lcmapper.insert(entity);
+		
 	}
 
 	@Override
 	public LikeCollect search(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return lcmapper.selectById(id);
 	}
 	@Override
@@ -39,19 +40,19 @@ public class LikeCollectDaoImpl implements LikeCollectDao {
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+
 		lcmapper.deleteById(id);
 	}
 
 	@Override
 	public void update(LikeCollect entity) {
-		// TODO Auto-generated method stub
+
 		lcmapper.updateById(entity);
 	}
 
 	@Override
 	public List<LikeCollect> getAll() {
-		// TODO Auto-generated method stub
+		
 		return lcmapper.selectList(null);
 	}
 		

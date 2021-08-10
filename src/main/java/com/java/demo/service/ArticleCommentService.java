@@ -28,8 +28,5 @@ public interface ArticleCommentService {
 	
 	// 获取当前文章的最后一条评论
 	public ArticleComment getLastArticleComment(Integer articleId);
-//	// 回复评论
-//	void replyArticleCommentById(User user, int replyId,String content,int articleID);
-//	
-//	public void replyArticleCommentById(Integer artId,Integer userId, Integer replyId,String content,Timestamp posttime);
+
 }

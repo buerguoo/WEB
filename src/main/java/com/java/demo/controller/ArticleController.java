@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,43 +39,55 @@ public class ArticleController {
 	@RequestMapping("/article/ShowArticleAll")
 	public ResponseWrapper<List<ArticleResponse>> ShowArticle(@RequestParam("art_id") Integer artId,
 			@RequestParam("cate_id") Integer cateId, @RequestParam("article_name") String articleName) {
+		// 初始化
 		List<ArticleResponse> articleResponses = new ArrayList<>();
+		// 获取所有文章
 		List<Article> articles = articleService.getAllArticles();
-		if(cateId!=null&&cateId != 0)
-		{
-			String tempLabel = null;
-			switch(cateId) {
+		// 贴上标签
+		// 有分类信息的
+		String tempLabel = null;
+		if (cateId != null&&cateId!=0) {
+
+			switch (cateId) {
 			case 1:
-				tempLabel="日记";
+				tempLabel = "日记";
 				break;
 			case 2:
-				tempLabel="技术";
+				tempLabel = "技术";
 				break;
 			case 3:
-				tempLabel="美食";
+				tempLabel = "美食";
 				break;
 			case 4:
-				tempLabel="感悟";
+				tempLabel = "感悟";
 				break;
-				default:
-					tempLabel = "日记";
+			default:
+				break;
 			}
+			
+			// 根据标签查找
 			articles = articleService.getArticlesByLabel(tempLabel);
 		}
-		if(articleName!="") {
+		// articleName参数不为空，则根据关键字查找
+		if (articleName != "") {
 			articles = articleService.getSearchArticles(articleName);
 		}
-		Integer tempId = artId;
-		int size = articles.size();
-		for(int i = 0;i < size;++i) {
-				Article article = articles.get(size - 1 -i);
-				
+		try {
+			Integer tempId = artId;
+			int size = articles.size();
+			for (int i = 0; i < size; ++i) {
+				Article article = articles.get(size - 1 - i);
+
 				ArticleResponse articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
 						article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
 						article.getContent());
 				articleResponses.add(articleResponse);
-			
-			
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("获取文章所有信息出错");
 		}
 		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
 	}
@@ -86,19 +97,20 @@ public class ArticleController {
 	@RequestMapping("/article/getArticleInfo")
 	public ResponseWrapper<ArticleResponse> ShowArticleInfo(@RequestParam("art_id") Integer artId,
 			@RequestParam("user_id") Integer userId) {
-		
+
 		Article article = articleService.getArticleById(artId);
 		ArticleResponse articleResponse = null;
 		ResponseWrapper<ArticleResponse> responseWrapper = null;
-		
-		if (article == null)
+
+		if (article == null) {
 			responseWrapper = new ResponseWrapper<ArticleResponse>(ResponseStatus.FAIL_4000, articleResponse);
-		else {
+			System.err.println("根据id查找文章失败");
+		} else {
 			// 获取文章id后要增加浏览次数
-			int tempViewCount = article.getViewCount();
+			Integer tempViewCount = article.getViewCount();
 			article.setViewCount(++tempViewCount);
 			articleService.updateArticleById(article);
-			
+
 			articleResponse = new ArticleResponse(article.getArticleId(), article.getArticleName(),
 					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
 					article.getContent());
@@ -115,7 +127,8 @@ public class ArticleController {
 		List<Article> as = new ArrayList<Article>();
 		for (Article a : articles)
 			as.add(a);
-		Collections.sort(as, new Comparator<Article>() {// 输出结果有问题，不是排序函数出错就是别的地方有问题
+		try {
+		Collections.sort(as, new Comparator<Article>() {
 			public int compare(Article a1, Article a2) {
 				int n1 = a1.getCommentCount();
 				int n2 = a2.getCommentCount();
@@ -128,13 +141,30 @@ public class ArticleController {
 				}
 			}
 		});
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("阿兴你个混蛋");
+		}
 		List<ArticleRightResponse> articleRightResponses = new ArrayList<>();
 		for (Article article : as) {
 			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
-			User user = userService.getUserById(articleComment.getUserId());
-			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
-					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent(), article.getViewCount());
-			articleRightResponses.add(articleRightResponse);
+			if (articleComment != null) {
+				User user = userService.getUserById(articleComment.getUserId());
+				ArticleRightResponse articleRightResponse = null;
+				if (user != null) {
+					articleRightResponse = new ArticleRightResponse(article.getArticleId(), user.getAvatar(),
+							user.getUsername(), article.getArticleName(), articleComment.getContent(),
+							article.getViewCount());
+				} else {
+					articleRightResponse = new ArticleRightResponse(article.getArticleId(), "/static/img/tou.jpg",
+							articleComment.getTempname() + "[" + articleComment.getTempemail() + "]",
+							article.getArticleName(), articleComment.getContent(), article.getViewCount());
+
+				}
+				articleRightResponses.add(articleRightResponse);
+			} else {
+				break;
+			}
 		}
 		if (articleRightResponses.size() < 10)
 			return new ResponseWrapper<List<ArticleRightResponse>>(articleRightResponses);
@@ -149,6 +179,7 @@ public class ArticleController {
 		List<Article> as = new ArrayList<Article>();
 		for (Article a : articles)
 			as.add(a);
+		try {
 		Collections.sort(as, new Comparator<Article>() {// 重写排序函数！！！
 			public int compare(Article a1, Article a2) {
 				int n1 = a1.getViewCount();
@@ -162,13 +193,30 @@ public class ArticleController {
 				}
 			}
 		});
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("阿兴你不是人");
+		}
 		List<ArticleRightResponse> articleRightResponses = new ArrayList<>();
 		for (Article article : as) {
 			ArticleComment articleComment = articleCommentService.getLastArticleComment(article.getArticleId());
-			User user = userService.getUserById(articleComment.getUserId());
-			ArticleRightResponse articleRightResponse = new ArticleRightResponse(article.getArticleId(),
-					user.getAvatar(), user.getUsername(), article.getArticleName(), articleComment.getContent(), article.getViewCount());
-			articleRightResponses.add(articleRightResponse);
+			if (articleComment != null) {
+				User user = userService.getUserById(articleComment.getUserId());
+				ArticleRightResponse articleRightResponse = null;
+				if (user != null) {
+					articleRightResponse = new ArticleRightResponse(article.getArticleId(), user.getAvatar(),
+							user.getUsername(), article.getArticleName(), articleComment.getContent(),
+							article.getViewCount());
+				} else {
+					articleRightResponse = new ArticleRightResponse(article.getArticleId(), "/static/img/tou.jpg",
+							articleComment.getTempname() + "[" + articleComment.getTempemail() + "]",
+							article.getArticleName(), articleComment.getContent(), article.getViewCount());
+
+				}
+				articleRightResponses.add(articleRightResponse);
+			} else {
+				break;
+			}
 		}
 		if (articleRightResponses.size() < 10)
 			return new ResponseWrapper<List<ArticleRightResponse>>(articleRightResponses);
@@ -182,62 +230,25 @@ public class ArticleController {
 	public ResponseWrapper<List<ArticleClassResponse>> ShowArtClassSearch() {
 		List<ArticleClassResponse> articleClassList = new ArrayList<>();
 		ArticleClassResponse[] articleClassResponses = new ArticleClassResponse[4];
-		articleClassResponses[0]=new ArticleClassResponse(1,"日记");
-		articleClassResponses[1]=new ArticleClassResponse(2,"技术");
-		articleClassResponses[2]=new ArticleClassResponse(3,"美食");
-		articleClassResponses[3]=new ArticleClassResponse(4,"感悟");
-		for(ArticleClassResponse articleClassResponse:articleClassResponses) {
+		articleClassResponses[0] = new ArticleClassResponse(1, "日记");
+		articleClassResponses[1] = new ArticleClassResponse(2, "技术");
+		articleClassResponses[2] = new ArticleClassResponse(3, "美食");
+		articleClassResponses[3] = new ArticleClassResponse(4, "感悟");
+		for (ArticleClassResponse articleClassResponse : articleClassResponses) {
 			articleClassList.add(articleClassResponse);
 		}
 		return new ResponseWrapper<List<ArticleClassResponse>>(articleClassList);
 
 	}
 
-//	@CrossOrigin
-//	@PostMapping({ "/article/ArtClassData" })
-//	public ResponseWrapper<List<ArticleResponse>> ShowArtClassSearch(@RequestParam("classId") Integer classId) {
-//		List<ArticleResponse> articleResponses = new ArrayList<>();
-//		if(classId==null) {
-//			return new ResponseWrapper<List<ArticleResponse>>(ResponseStatus.FAIL_4000,articleResponses);
-//		}
-//		String tempLabel = null;
-//		switch(classId) {
-//		case 0:
-//			tempLabel="日记";
-//			break;
-//		case 1:
-//			tempLabel="技术";
-//			break;
-//		case 2:
-//			tempLabel="美食";
-//			break;
-//		case 3:
-//			tempLabel="感悟";
-//			break;
-//			default:
-//				tempLabel = "日记";
-//		}
-//		List<Article> articles = articleService.getArticlesByLabel(tempLabel);
-//	
-//		Integer tempId = 0;
-//		int size = articles.size();
-//		for(int i = 0;i < size;++i) {
-//			Article article = articles.get(size - 1 -i);
-//			ArticleResponse articleResponse = new ArticleResponse(tempId++, article.getArticleName(),
-//					article.getPostTime(), article.getViewCount(), article.getCommentCount(), article.getLabel(),
-//					article.getContent());
-//			articleResponses.add(articleResponse);
-//		}
-//		return new ResponseWrapper<List<ArticleResponse>>(articleResponses);
-//	}
-	
-	//发布文章，需要修改！！等前端把文章标签加上，多传一个标签的参数
+
 	@CrossOrigin
 	@RequestMapping("/article/edit")
-	public ResponseWrapper<String> postArticle(@RequestParam("title") String title, @RequestParam("content") String content, 
-			@RequestParam("label") String label) {
+	public ResponseWrapper<String> postArticle(@RequestParam("title") String title,
+			@RequestParam("content") String content, @RequestParam("label") String label) {
 		Integer maxId = articleService.getMaxArticleId();
-		Article article = new Article(maxId + 1, title, label, 0, 0, content, new Timestamp(System.currentTimeMillis()));
+		Article article = new Article(maxId + 1, title, label, 0, 0, content,
+				new Timestamp(System.currentTimeMillis()));
 		articleService.addArticle(article);
 		return new ResponseWrapper<String>(article.getArticleName());
 	}

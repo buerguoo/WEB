@@ -16,8 +16,6 @@ public class LikeDaoImpl implements LikeDao {
 	
 	@Override
 	public Integer getLikeCount() {
-		// TODO Auto-generated method stub
-		//System.out.println("------------------");
 		
 		LikeCount likeCount = likeMapper.selectById(0);
 		

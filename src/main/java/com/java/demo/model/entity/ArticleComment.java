@@ -43,6 +43,12 @@ public class ArticleComment {
 	// 内容
 	private String content;
 	
+	// 游客名称
+	private String tempname;
+	
+	// 游客邮箱
+	private String tempemail;
+	
 	// 回复时间
 	private Timestamp posttime;
 }

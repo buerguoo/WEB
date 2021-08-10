@@ -3,6 +3,7 @@ package com.java.demo.dao.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,7 +55,9 @@ public class ArticleCommentDaoImpl implements ArticleCommentDao {
 	public List<ArticleComment> getAllArticleComments(Integer articleid) {
 
 		QueryWrapper<ArticleComment> queryWrapper = Wrappers.query();
-		queryWrapper.like("artid", articleid);
+		queryWrapper.like("leaveid",0);
+		queryWrapper.and(wrapper->wrapper.eq("artid",articleid));
+		//queryWrapper.like("artid", articleid);
 		return articleCommentMapper.selectList(queryWrapper);
 
 	}
